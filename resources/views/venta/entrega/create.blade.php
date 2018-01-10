@@ -21,6 +21,7 @@
             <div class="form-group">
                 <label for="zona">Zona</label>
                 <select name="zona" class="form-control">
+                       <option value="Z00">Z0I</option>
                        <option value="Z0">Z0</option>
                        <option value="Z1">Z1</option>
                        <option value="Z2">Z2</option>
@@ -28,6 +29,7 @@
                        <option value="Z4">Z4</option>
                        <option value="Z5">Z5</option>
                        <option value="Z6">Z6</option>
+                       <option value="Z7">Z7</option>
                 </select>
             </div>
         </div>
