@@ -17,7 +17,7 @@
 			{!!Form::open(array('url'=>'venta/entrega','method'=>'POST','autocomplete'=>'off'))!!}
             {{Form::token()}}
     <div class="row">
-    	<div class="col-lg-1 col-sm-1 col-md-1 col-xs-12">
+    	<div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
             <div class="form-group">
                 <label for="zona">Zona</label>
                 <select name="zona" class="form-control">
@@ -31,7 +31,7 @@
                 </select>
             </div>
         </div>
-        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+        <div class="col-lg-9 col-sm-9 col-md-9 col-xs-12">
             <div class="form-group">
                 <label for="cliente">Cliente</label>
                 <select name="cliente" id="cliente" class="form-control selectpicker" data-live-search="true">
@@ -41,7 +41,7 @@
                 </select>
             </div>
         </div>
-        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+        <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
             <div class="form-group">
                 <label for="empleado">Entrega</label>
                 <select name="empleado" class="form-control">
@@ -55,19 +55,14 @@
                 </select>
             </div>
         </div>
-        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
-            <div class="form-group">
-                <label for="fecha_hora">Inicio</label>
-                <input type="date"   name="fecha_hora" value="{{old('fecha_hora')}}" class="form-control" >
-            </div>
-        </div>
-        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+       
+        <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
             <div class="form-group">
                 <label for="monto">Monto</label>
                 <input type="text" name="monto" value="{{old('monto')}}" class="form-control" placeholder="Monto entregado">
             </div>
         </div>
-    	<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+    	<div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
             <div class="form-group">
                 <label for="plan">Plan</label>
                <select name="plan" id="plan" class="form-control">
@@ -80,13 +75,19 @@
                </select>
             </div>
         </div>
-        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+         <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+            <div class="form-group">
+                <label for="fecha_hora">Inicio</label>
+                <input type="date"   name="fecha_hora" value="{{old('fecha_hora')}}" class="form-control" >
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
             <div class="form-group">
                 <label for="fecha_cancela">Cancelación</label>
                 <input type="date"   name="fecha_cancela" value="{{old('fecha_cancela')}}" class="form-control" placeholder="Fecha de Cancelación">
             </div>
         </div>
-        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+        <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
             <div class="form-group">
                 <label for="concepto">Concepto</label>
                 <select name="concepto" class="form-control">
