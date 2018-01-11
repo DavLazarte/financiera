@@ -47,13 +47,15 @@
             <div class="form-group">
                 <label for="empleado">Entrega</label>
                 <select name="empleado" class="form-control">
-                       <option value="dante">Dante</option>
-                       <option value="leo">Leo</option>
-                       <option value="david">David</option>
-                       <option value="Z3">Z3</option>
-                       <option value="Z4">Z4</option>
-                       <option value="Z5">Z5</option>
-                       <option value="Z6">Z6</option>
+                       <option value="dani">Dani Miranda</option>
+                       <option value="karina">Karina Fenoglio</option>
+                       <option value="leo">Leo Escobar</option>
+                       <option value="david">David Lazarte</option>
+                       <option value="veronica">Veronica Huerta</option>
+                       <option value="dante">Dante Miranda</option>
+                       <option value="dario">Dario Ogas</option>
+                       <option value="alvaro">Alvaro Nieva</option>
+                       <option value="santiago">Santiago Ruiz</option>
                 </select>
             </div>
         </div>
