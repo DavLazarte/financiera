@@ -28,8 +28,8 @@
 					<td>{{ $per->domicilio}}</td>
 					<td>{{ $per->estado}}</td>
 					<td>
-						<a href="{{URL::action('ClienteController@edit',$per->idpersona)}}"><button class="btn btn-info">Editar</button></a>
-                         <a href="" data-target="#modal-delete-{{$per->idpersona}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
+						<a href="{{URL::action('ClienteController@edit',$per->idpersona)}}"><button class="btn btn-info btn-sm">Editar</button></a>
+                         <a href="" data-target="#modal-delete-{{$per->idpersona}}" data-toggle="modal"><button class="btn btn-danger btn-sm">X</button></a>
 					</td>
 				</tr>
 				@include('persona.cliente.modal')
