@@ -51,19 +51,25 @@ class VentaController extends Controller
     }
     public function store (VentaFormRequest $request)
     {
-        $venta=new Venta;
+        /*$venta=new Venta;
 
-        $venta->fecha_hora=$request->get('fecha_hora');
-        $venta->zona=$request->get('zona');
-        $venta->idpersona=$request->get('cliente');
-        $venta->monto=$request->get('monto');
-        $venta->plan=$request->get('plan');
-        $venta->fecha_cancela=$request->get('fecha_cancela');
-        $venta->concepto=$request->get('concepto');
-        $venta->empleado=$request->get('empleado');
-        $venta->estado='Pendiente';       
+        $venta->fecha_hora    = $request->get('fecha_hora');
+        $venta->zona          = $request->get('zona');
+        $venta->idpersona     = $request->get('cliente');
+        $venta->monto         = $request->get('monto');
+        $venta->plan          = $request->get('plan');
+        $venta->fecha_cancela = $request->get('fecha_cancela');
+        $venta->concepto      = $request->get('concepto');
+        $venta->empleado      = $request->get('empleado');
+        $venta->estado        = 'Pendiente';       
         $venta->save();
-        return Redirect::to('venta/entrega');
+        return Redirect::to('venta/entrega');*/
+        if($request->ajax()){
+            Venta::create($request->all());
+            return response()->json([
+                "mensaje" => "creado"
+            ]);
+        }
 
     }
     public function edit($id)
