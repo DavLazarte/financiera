@@ -14,12 +14,10 @@
 			@endif
 		</div>
 	</div>
-  <div id="msj-success" class="alert alert-success alert-dismissible" role="alert" style="display:none">
-     <strong>Entrega Cargada Correctamente.. </strong>
-     <button type="button" class="close" aria-label="Close">
-       <span aria-hidden="true">×</span>
-      </button>
-  </div>
+ <div id="msj-success" class="alert alert-danger alert-dismissible" role="alert" style="display:none">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Entrega Cargada</strong>
+</div>
 			
     <div class="row">
       <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
@@ -154,10 +152,10 @@ $('#liClientes').addClass("active");
             },
 
         success:function(){
-            $("#msj-success").fadeIn();
+            $("#msj-success").fadeIn("fast");
         },
         error:function(msj){
-            $("#msj").html(msj.responseJSON.direccion);
+            $("#msj").html(msj.responseJSON.entrega);
             $("#msj-error").fadeIn();
         }
     });
