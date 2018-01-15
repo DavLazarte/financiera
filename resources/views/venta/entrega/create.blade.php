@@ -131,7 +131,7 @@ $('#liClientes').addClass("active");
     var cancelacion  = $("#cancelacion").val();
     var concepto     = $("#concepto").val();
     var estado       = $("#estado").val();
-    var route        = "/venta/entrega";
+    var route        = "{{url('venta/entrega')}}";
     var token        = $("#token").val();
 
     $.ajax({
