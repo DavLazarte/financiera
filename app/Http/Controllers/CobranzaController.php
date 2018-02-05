@@ -54,16 +54,21 @@ public function __construct()
     }
     public function store (CobranzaFormRequest $request)
     {
-        $pago=new Cobranza;
+        /*$pago=new Cobranza;
 
         $pago->idventa=$request->get('idventa');
         $pago->fecha_hora=$request->get('fecha_hora');
         $pago->zona=$request->get('zona');
         $pago->monto=$request->get('monto');
         $pago->estado='Activo';       
-        $pago->save();
-        return Redirect::to('cobranza/pago');
-
+        $pago->save()
+        return Redirect::to('cobranza/pago');*/ 
+        if($request->ajax()){
+            Cobranza::create($request->all());
+            return response()->json([
+                "mensaje" => "creado"
+            ]);
+        }
     }
     public function edit($id)
     {

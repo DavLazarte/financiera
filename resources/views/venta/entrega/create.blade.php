@@ -15,8 +15,9 @@
 		</div>
 	</div>
   @include('alerts.success')
-  <div id="msj-success" class="alert alert-success alert-dismissible" role="alert" style="display:none">
-        <strong> Entrega Agregado Correctamente.</strong>
+  <div id="msj-success" class="alert alert-success" role="alert" style="display:none">
+        <button class="close" data-dismiss="alert"><span>&times;</span></button>
+        Entrega Agregado Correctamente
   </div>
     <div class="row">
       <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
