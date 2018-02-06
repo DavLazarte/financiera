@@ -62,3 +62,6 @@ Route::get('reporteliquidacion/{id}', 'LiquidacionController@reportec');
 Route::get('api/cliente', function(){
     return Datatables()->eloquent(ConfiSis\Persona::query())->make(true);
 });
+Route::get('api/pago', function(){
+     return Datatables()->eloquent(ConfiSis\Cobranza::query())->make(true);
+});

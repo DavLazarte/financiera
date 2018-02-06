@@ -16,6 +16,7 @@
 					<th>DNI</th>
 					<th>Teléfono</th>
 					<th>Domicilio</th>
+					<th>Tipo</th>
 					<th>Estado</th>
 					<th>Opciones</th>
 				</thead>
@@ -50,8 +51,9 @@ $(document).ready(function(){
 			{data: 'idpersona'},
 			{data: 'nombre_apellido'},
 			{data: 'dni'},
-			{data: 'telefono'},
 			{data: 'domicilio'},
+			{data: 'telefono'},
+			{data: 'tipo'},
 			{data: 'estado'},												
 		]
     });
