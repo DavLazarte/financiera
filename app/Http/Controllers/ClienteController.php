@@ -21,7 +21,7 @@ class ClienteController extends Controller
     public function index()
     {
 
-            $personas = Persona::all();
+            $personas = Persona::all()->take(10);
             return view('persona.cliente.index',["personas"=>$personas]);
     
     }

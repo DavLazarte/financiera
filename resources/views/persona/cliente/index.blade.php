@@ -43,6 +43,17 @@
 <script>
 $(document).ready(function(){
     $('#tabla_clientes').DataTable({
+		"processing": true,
+        "serverSide": true,
+        "ajax": "api/cliente",
+		"columns":[
+			{data: 'idpersona'},
+			{data: 'nombre_apellido'},
+			{data: 'dni'},
+			{data: 'telefono'},
+			{data: 'domicilio'},
+			{data: 'estado'},												
+		]
     });
 });
 </script>

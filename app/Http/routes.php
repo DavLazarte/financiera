@@ -57,3 +57,8 @@ Route::get('reporteresumen/{searchText}', 'ResumenController@report');
 Route::get('reporteliquidaciones/{searchText}', 'LiquidacionController@reporte');
 Route::get('reporteliquidaciones', 'LiquidacionController@report');
 Route::get('reporteliquidacion/{id}', 'LiquidacionController@reportec');
+
+//datatables
+Route::get('api/cliente', function(){
+    return Datatables()->eloquent(ConfiSis\Persona::query())->make(true);
+});
