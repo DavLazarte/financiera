@@ -16,7 +16,6 @@
 					<th>DNI</th>
 					<th>Teléfono</th>
 					<th>Domicilio</th>
-					<th>Tipo</th>
 					<th>Estado</th>
 					<th>Opciones</th>
 				</thead>
@@ -42,7 +41,11 @@
 </div>
 @push ('scripts')
 <script>
-$(document).ready(function(){
+	$(document).ready(function(){
+    $('#tabla_clientes').DataTable({
+    });
+});
+/*$(document).ready(function(){
     $('#tabla_clientes').DataTable({
 		"processing": true,
         "serverSide": true,
@@ -57,7 +60,7 @@ $(document).ready(function(){
 			{data: 'estado'},												
 		]
     });
-});
+});*/
 </script>
 <script>
 $('#liVentas').addClass("treeview active");

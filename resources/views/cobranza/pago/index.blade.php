@@ -3,7 +3,7 @@
 <div class="row">
 	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 		<h3>Listado de Pagos <a href="pago/create"><button class="btn btn-success">Nuevo</button></a> <a href="{{URL::action('CobranzaController@report',$searchText)}}" target="_blank"><button class="btn btn-info">Reporte</button></a></h3>
-		@include('cobranza.pago.search')
+	    @include('cobranza.pago.search')
 	</div>
 </div>
 
@@ -40,7 +40,11 @@
 <script src="//code.jquery.com/jquery-1.12.4.js"></script>
 <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script>
-$(document).ready(function() {
+/*$(document).ready(function() {
+ $(document).ready(function(){
+    $('#tabla_pagos').DataTable({
+ });
+});
     $('#tabla_pagos').DataTable( {
 		"processing": true,
         "serverSide": true,
@@ -54,7 +58,7 @@ $(document).ready(function() {
 			{data: 'estado'},										
 		]
     } );
-} );
+} );*/
 </script>
 <script>
 $('#liVentas').addClass("treeview active");
