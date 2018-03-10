@@ -17,7 +17,7 @@
             {!!Form::open(array('url'=>'administracion/ingreso','method'=>'POST','autocomplete'=>'off','files'=>'true'))!!}
             {{Form::token()}}
     <div class="row">
-       <div class="col-lg-1 col-sm-1 col-md-1 col-xs-12">
+       <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
             <div class="form-group">
                 <label for="zona">Zona</label>
                 <select name="zona" class="form-control">
@@ -28,6 +28,7 @@
                        <option value="Z4">Z4</option>
                        <option value="Z5">Z5</option>
                        <option value="Z6">Z6</option>
+                       <option value="Z7">Z7</option>
                 </select>
             </div>
         </div>
@@ -50,7 +51,12 @@
         <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
             <div class="form-group">
                 <label for="concepto">Concepto</label>
-                <input type="text" name="concepto" required value="{{old('concepto')}}" class="form-control" placeholder="Concepto de la Salida...">
+                <select name="concepto" class="form-control">
+                    <option value="Cobranza">Cobranza</option>
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="Caja">Caja</option>
+                    <option value="Otro">Otro</option>
+                </select>
             </div>
         </div>
         <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
@@ -60,11 +66,7 @@
             </div>
         </div>
     </div>
-            
-            
-            
-
-            {!!Form::close()!!}
+{!!Form::close()!!}
 @push ('scripts')
 <script>
 $('#liAlmacen').addClass("treeview active");

@@ -47,6 +47,7 @@
                        <option value="Z4">Z4</option>
                        <option value="Z5">Z5</option>
                        <option value="Z6">Z6</option>
+                       <option value="Z7">Z7</option>
                 </select>
             </div>
         </div>

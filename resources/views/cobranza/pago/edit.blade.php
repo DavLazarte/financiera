@@ -40,54 +40,68 @@
                        <option value="Z4">Z4</option>
                        <option value="Z5">Z5</option>
                        <option value="Z6">Z6</option>
+                       <option value="Z7">Z7</option>
                     @elseif ($cobranza->zona=='Z1')          
-                        <option value="Z0">Z0</option>
+                       <option value="Z0">Z0</option>
                        <option value="Z1" selected>Z1</option>
                        <option value="Z2">Z2</option>
                        <option value="Z3">Z3</option>
                        <option value="Z4">Z4</option>
                        <option value="Z5">Z5</option>
                        <option value="Z6">Z6</option>
+                       <option value="Z7">Z7</option>                       
                     @elseif ($cobranza->zona=='Z2')
-                        <option value="Z0">Z0</option>
+                       <option value="Z0">Z0</option>
                        <option value="Z1">Z1</option>
                        <option value="Z2" selected>Z2</option>
                        <option value="Z3">Z3</option>
                        <option value="Z4">Z4</option>
                        <option value="Z5">Z5</option>
                        <option value="Z6">Z6</option>
+                       <option value="Z7">Z7</option>
                     @elseif ($cobranza->zona=='Z3')
-                        <option value="Z0">Z0</option>
+                       <option value="Z0">Z0</option>
                        <option value="Z1">Z1</option>
                        <option value="Z2">Z2</option>
                        <option value="Z3" selected>Z3</option>
                        <option value="Z4">Z4</option>
                        <option value="Z5">Z5</option>
                        <option value="Z6">Z6</option>
+                       <option value="Z7">Z7</option>
                     @elseif ($cobranza->zona=='Z4')
-                    <option value="Z0">Z0</option>
+                       <option value="Z0">Z0</option>
                        <option value="Z1">Z1</option>
                        <option value="Z2">Z2</option>
                        <option value="Z3">Z3</option>
                        <option value="Z4" selected>Z4</option>
                        <option value="Z5">Z5</option>
                        <option value="Z6">Z6</option>
+                       <option value="Z7">Z7</option>
                     @elseif ($cobranza->zona=='Z5')
-                        <option value="Z0">Z0</option>
+                       <option value="Z0">Z0</option>
                        <option value="Z1">Z1</option>
                        <option value="Z2">Z2</option>
                        <option value="Z3">Z3</option>
                        <option value="Z4">Z4</option>
                        <option value="Z5" selected>Z5</option>
                        <option value="Z6">Z6</option>
-                    @else
-                        <option value="Z0">Z0</option>
+                    @elseif ($cobranza->zona=='Z6')
+                       <option value="Z0">Z0</option>
                        <option value="Z1">Z1</option>
                        <option value="Z2">Z2</option>
                        <option value="Z3">Z3</option>
                        <option value="Z4">Z4</option>
                        <option value="Z5">Z5</option>
-                       <option value="Z6" selected="">Z6</option>
+                       <option value="Z6" selected >Z6</option>
+                    @else 
+                       <option value="Z0">Z0</option>
+                       <option value="Z1">Z1</option>
+                       <option value="Z2">Z2</option>
+                       <option value="Z3">Z3</option>
+                       <option value="Z4">Z4</option>
+                       <option value="Z5">Z5</option>
+                       <option value="Z6">Z6</option>
+                       <option value="Z7" selected >Z7</option>
                     @endif
                 </select>
             </div>
