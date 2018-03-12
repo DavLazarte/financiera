@@ -126,6 +126,7 @@
                 <li><a href="{{url('cobranza/pago')}}"><i class="fa fa-circle-o"></i> Pagos</a></li>
               </ul>
             </li>
+          @if(Auth::user()->name == 'Z0')
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-users"></i> <span>Administracion</span>
@@ -139,7 +140,7 @@
                 <li><a href="{{url('administracion/caja')}}"><i class="fa fa-circle-o"></i> Caja</a></li>
               </ul>
             </li>
-                       
+          @endif      
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-tasks"></i> <span>Herramientas</span>
@@ -147,8 +148,7 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="{{url('herramienta/usuario')}}"><i class="fa fa-circle-o"></i>Usuarios</a></li>
-                <li><a href="{{url('herramienta/backup')}}""><i class="fa fa-circle-o"></i> Backup</a></li>
-                
+                <li><a href="{{url('herramienta/backup')}}"><i class="fa fa-circle-o"></i> Backup</a></li>
               </ul>
             </li>                    
           </ul>
@@ -198,7 +198,7 @@
         <div class="pull-right hidden-xs">
           <b>Version</b> 0.1.1
         </div>
-        <strong>Copyright &copy; 2017 CFC</a>.</strong> 
+        <strong>Copyright &copy; 2018 CFC</a>.</strong> 
       </footer>
 
       

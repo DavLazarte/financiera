@@ -25,6 +25,7 @@ class SalidaController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('caja');        
     }
     public function index(Request $request)
     {
