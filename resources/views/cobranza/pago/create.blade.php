@@ -17,7 +17,7 @@
     <div id="msj-success" class="alert alert-success" role="alert" style="display:none">
     <button class="close" data-dismiss="alert"><span>&times;</span></button>
     Pago Cargado
-</div>
+    </div>
     <div class="row">
     <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
         <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">

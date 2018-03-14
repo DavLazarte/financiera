@@ -43,56 +43,55 @@ class CajaController extends Controller
     }
     public function create()
     {
-    	$ingresos=DB::table('ingreso')->where('estado','=','Activo')->orwhere('estado','=','Permanente')->get();
-    	$salidas=DB::table('salida')->where('estado','=','Activo')->orwhere('estado','=','Permanente')->get();
-    	$personas=DB::table('persona')->where('tipo','=','Empleado')->get();
-    	$cajas=DB::table('caja as c')->orderBy('c.idcaja','desc')->first();
+    	$ingresos = DB::table('ingreso')   -> where('estado','=','Pendiente')->orwhere('estado','=','Permanente')->get();
+    	$salidas  = DB::table('salida')    -> where('estado','=','Pendiente')->orwhere('estado','=','Permanente')->get();
+    	$personas = DB::table('persona')   -> where('tipo','=','Empleado')->get();
+    	$cajas    = DB::table('caja as c') -> orderBy('c.idcaja','desc')->first();
     
         return view("administracion.caja.create",["personas"=>$personas,"cajas"=>$cajas,"ingresos"=>$ingresos,"salidas"=>$salidas]);
     }
 
      public function store (CajaFormRequest $request)
     {
-    	try{
+    	//try{
         	DB::beginTransaction();
-        	$caja=new Caja;
-        	$caja->totalingreso=$request->get('totalingreso');
-        	$caja->totalsalida=$request->get('totalsalida');
-	        $caja->totalsuma=$request->get('totalsuma');
-            $caja->estado='Cerrada';
+        	$caja               = new Caja;
+        	$caja->totalingreso = $request->get('totalingreso');
+        	$caja->totalsalida  = $request->get('totalsalida');
+	        $caja->totalsuma    = $request->get('totalsuma');
+            $caja->estado       = 'Cerrada';
 	        $caja->save();
 
-	        $zonaingreso = $request->get('zonaingreso');
-	        $ingreso = $request->get('ingreso');
-	        $montoingreso = $request->get('montoingreso');
-	        $zonasalida = $request->get('zonasalida');
-	        $salida = $request->get('salida');
-	        $montosalida = $request->get('montosalida');
-	        $concepto = $request->get('concepto');
-	        
-
-	        $cont = 0;
+	        $zonaingreso        = $request->get('zonaingreso');
+	        //$ingreso            = $request->get('ingreso');
+	        $montoingreso       = $request->get('montoingreso');
+	        $zonasalida         = $request->get('zonasalida');
+	        //$salida             = $request->get('salida');
+	        $montosalida        = $request->get('montosalida');
+	        $concepto           = $request->get('concepto');
+            
+            $cont = 0;
 
 	        while($cont < count($zonaingreso))
 	        {
-	            $detalle = new Detalle_caja();
-	            $detalle->caja= $caja->idcaja;
-	            $detalle->zonaingreso= $zonaingreso[$cont]; 
-	            $detalle->ingreso= $ingreso[$cont];
-	            $detalle->montoingreso= $montoingreso[$cont];
-	            $detalle->zonasalida= $zonasalida[$cont];
-	            $detalle->salida= $salida[$cont];
-	            $detalle->montosalida= $montosalida[$cont];
-	            $detalle->concepto= $concepto[$cont];
+	            $detalle               = new Detalle_caja();
+	            $detalle->caja         = $caja->idcaja;
+	            $detalle->zonaingreso  = $zonaingreso[$cont]; 
+	            //$detalle->ingreso      = $ingreso[$cont];
+	            $detalle->montoingreso = $montoingreso[$cont];
+	            $detalle->zonasalida   = $zonasalida[$cont];
+	            //$detalle->salida       = $salida[$cont];
+	            $detalle->montosalida  = $montosalida[$cont];
+	            $detalle->concepto     = $concepto[$cont];
 	            $detalle->save();
 	            $cont=$cont+1;            
 	        }
 	        DB::commit();
 
-        }catch(\Exception $e)
+        /*}catch(\Exception $e)
         {
           	DB::rollback();
-        }
+        }*/
         return Redirect::to('administracion/caja');
     }
 
@@ -111,29 +110,12 @@ class CajaController extends Controller
     }
     public function edit($id){ 
 
-        $caja=DB::table('caja as v')
-            ->select('v.idcaja','v.estado','v.total_caja','v.sena','v.cuota','v.fecha_cuota','v.saldo')
-            ->where('v.idcaja','=',$id)
-            ->first();    
+        $caja = DB::table('caja as v')
+         ->select('v.idcaja','v.estado','v.total_caja','v.sena','v.cuota','v.fecha_cuota','v.saldo')
+         ->where('v.idcaja','=',$id)
+         ->first();    
         return view("cajas.caja.edit",["caja"=>$caja]);
     }
-    public function update(cajaFormRequest $request,$id){
-
-            $caja=caja::findOrFail($id);
-            
-            $caja->sena=$request->get('sena');
-            $caja->saldo=$request->get('saldo');
-            $caja->estado=$request->get('estado');
-            $caja->cuota=$request->get('cuota');
-
-            $mytime = Carbon::now('America/Argentina/Tucuman');
-            $caja->fecha_cuota=$mytime->toDateTimeString();
-            
-
-            $caja->update();
- 
-            return Redirect::to('cajas/caja');
-        }
     
     public function reportec($id){
          //Obtengo los datos

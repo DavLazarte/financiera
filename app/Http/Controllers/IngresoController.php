@@ -3,20 +3,15 @@
 namespace ConfiSis\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use ConfiSis\Http\Requests;
-
 use ConfiSis\Ingreso;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use ConfiSis\Http\Requests\IngresoFormRequest;
-
 use DB;
-
 use Carbon\Carbon;
 use Response;
 use Illuminate\Support\Collection;
-
 use Fpdf;
 
 class IngresoController extends Controller
@@ -29,8 +24,8 @@ class IngresoController extends Controller
     {
         if ($request)
         {
-            $query=trim($request->get('searchText'));
-            $ingresos=DB::table('ingreso as i')
+            $query    = trim($request->get('searchText'));
+            $ingresos = DB::table('ingreso as i')
             ->join('persona as p','i.empleado','=','p.idpersona')
             ->select('i.idingreso','i.zona','i.empleado','i.created_at','i.monto','i.concepto','i.estado','p.nombre_apellido')
             ->where('i.empleado','LIKE','%'.$query.'%')
@@ -43,19 +38,18 @@ class IngresoController extends Controller
     }
     public function create()
     {
-    	$empleados=DB::table('persona')->where('tipo','=','Empleado')
+    	$empleados = DB::table('persona')->where('tipo','=','Empleado')
     	->get();
         return view("administracion.ingreso.create",["empleados"=>$empleados]);
     }
     public function store (IngresoFormRequest $request)
     {
-        $ingresos=new Ingreso;
-     
-        $ingresos->zona=$request->get('zona');
-        $ingresos->empleado=$request->get('empleado');
-        $ingresos->monto=$request->get('monto');
-        $ingresos->concepto=$request->get('concepto');
-        $ingresos->estado='activo';
+        $ingresos           = new Ingreso;
+        $ingresos->zona     = $request->get('zona');
+        $ingresos->empleado = $request->get('empleado');
+        $ingresos->monto    = $request->get('monto');
+        $ingresos->concepto = $request->get('concepto');
+        $ingresos->estado   = 'Pendiente';
         $ingresos->save();
         return Redirect::to('administracion/ingreso');
 
@@ -63,8 +57,8 @@ class IngresoController extends Controller
    
     public function edit($id)
     {
-        $ingreso=Ingreso::findOrFail($id);
-        $empleados=DB::table('persona')->where('tipo','=','Empleado')
+        $ingreso   = Ingreso::findOrFail($id);
+        $empleados = DB::table('persona')->where('tipo','=','Empleado')
     	->get();
         return view("administracion.ingreso.edit",["empleados"=>$empleados,"ingreso"=>$ingreso]);
     }
@@ -73,19 +67,17 @@ class IngresoController extends Controller
     public function update(IngresoFormRequest $request,$id)
     {
        
-        $ingresos=Ingreso::findOrFail($id);
-        $ingresos->zona=$request->get('zona');
-        $ingresos->empleado=$request->get('empleado');
-        $ingresos->monto=$request->get('monto');
-        $ingresos->concepto=$request->get('concepto');
-        $ingresos->estado=$request->get('estado');
-
+        $ingresos           = Ingreso::findOrFail($id);
+        $ingresos->zona     = $request->get('zona');
+        $ingresos->empleado = $request->get('empleado');
+        $ingresos->monto    = $request->get('monto');
+        $ingresos->concepto = $request->get('concepto');
         $ingresos->update();
         return Redirect::to('administracion/ingreso');
     }
    public function reporte (){
          //Obtenemos los registros
-         $registros=DB::table('ingreso as i')
+        $registros=DB::table('ingreso as i')
             ->join('persona as p','i.empleado','=','p.idpersona')
             ->select('i.idingreso','i.zona','i.empleado','i.created_at','i.monto','i.concepto','i.estado','p.nombre_apellido')
             ->orderBy('i.idingreso','asc')

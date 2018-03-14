@@ -52,7 +52,7 @@ class SalidaController extends Controller
         $salidas->monto=$request->get('monto');
         $salidas->concepto=$request->get('concepto');
         $salidas->observaciones=$request->get('observaciones');
-        $salidas->estado='activo';
+        $salidas->estado='Pendiente';
         $salidas->save();
         return Redirect::to('administracion/salida');
 
