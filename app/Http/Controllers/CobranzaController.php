@@ -37,7 +37,7 @@ public function __construct()
             ->orwhere('c.idventa','LIKE','%'.$query.'%')
             ->orwhere('c.fecha_hora','LIKE','%'.$query.'%')
             ->orwhere('c.zona','LIKE','%'.$query.'%')
-            ->orderBy('idcobranza','desc')
+            ->orderBy('idcobranza','asc')
             ->paginate(7);
             return view('cobranza.pago.index',["pagos"=>$pagos,"searchText"=>$query]);
         }
@@ -107,7 +107,7 @@ public function __construct()
             ->join('venta as v','c.idventa','=','v.idventa')
             ->join('persona as p','v.idpersona','=','p.idpersona')
             ->select('c.idcobranza','c.idventa','c.fecha_hora','c.zona','p.nombre_apellido','c.monto','c.estado')
-            ->orderBy('idcobranza','desc')
+            ->orderBy('idcobranza','asc')
             ->get();
 
          $pdf = new Fpdf();
@@ -162,7 +162,7 @@ public function __construct()
             ->orwhere('c.idventa','LIKE','%'.$searchText.'%')
             ->orwhere('c.fecha_hora','LIKE','%'.$searchText.'%')
             ->orwhere('c.zona','LIKE','%'.$searchText.'%')
-            ->orderBy('idcobranza','desc')
+            ->orderBy('idcobranza','asc')
             ->get();
 
          $pdf = new Fpdf();
