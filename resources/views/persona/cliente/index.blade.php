@@ -19,21 +19,8 @@
 					<th>Estado</th>
 					<th>Opciones</th>
 				</thead>
-               @foreach ($personas as $per)
-				<tr>
-					<td>{{ $per->idpersona}}</td>
-					<td>{{ $per->nombre_apellido}}</td>
-					<td>{{ $per->dni}}</td>
-					<td>{{ $per->telefono}}</td>
-					<td>{{ $per->domicilio}}</td>
-					<td>{{ $per->estado}}</td>
-					<td>
-						<a href="{{URL::action('ClienteController@edit',$per->idpersona)}}"><button class="btn btn-info btn-sm">Editar</button></a>
-                         <a href="" data-target="#modal-delete-{{$per->idpersona}}" data-toggle="modal"><button class="btn btn-danger btn-sm">X</button></a>
-					</td>
-				</tr>
-				@include('persona.cliente.modal')
-				@endforeach
+               
+				
 			</table>
 		</div>
 		
@@ -41,30 +28,33 @@
 </div>
 @push ('scripts')
 <script>
-	$(document).ready(function(){
-    $('#tabla_clientes').DataTable({
-    });
-});
-/*$(document).ready(function(){
-    $('#tabla_clientes').DataTable({
-		"processing": true,
-        "serverSide": true,
-        "ajax": "api/cliente",
-		"columns":[
-			{data: 'idpersona'},
-			{data: 'nombre_apellido'},
-			{data: 'dni'},
-			{data: 'domicilio'},
-			{data: 'telefono'},
-			{data: 'tipo'},
-			{data: 'estado'},												
+function activar_tabla_clientes() {
+$(document).ready(function(){
+	$('#tabla_clientes').DataTable({
+		processing: true,
+		serverSide: true,
+		pageLength: 20,
+		language: {
+			     "url": '{!! asset('plugins/datatables/latino.json')  !!}'
+			       } ,
+		ajax: '{!! url('listado_clientes_data') !!}',
+		columns: [
+			{ data: 'idpersona', name: 'idpersona' },
+			{ data: 'nombre_apellido', name:'nombre_apellido' },
+			{ data: 'dni', name:'dni' },
+			{ data: 'telefono', name: 'telefono' },
+			{ data: 'domicilio', name: 'domicilio' },
+			{ data: 'estado', name:'estado' },
+			{ data: null, render: function ( data, type, row ) {
+				return "<a href='{{ url('editar_cliente/') }}/"+ data.idpersona +"' <button class='btn btn-info btn-sm'>Editar</button></a>" }
+			}
 		]
-    });
-});*/
-</script>
-<script>
-$('#liVentas').addClass("treeview active");
-$('#liClientes').addClass("active");
+	});
+  });		 
+}
+
+activar_tabla_clientes();
+
 </script>
 @endpush
 @endsection

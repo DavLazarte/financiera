@@ -9,6 +9,7 @@ use ConfiSis\Persona;
 use Illuminate\Support\Facades\Redirect;
 use ConfiSis\Http\Requests\PersonaFormRequest;
 use DB;
+use Datatables;
 
 use Fpdf;
 
@@ -21,8 +22,8 @@ class ClienteController extends Controller
     public function index()
     {
 
-            $personas = Persona::all()->take(10);
-            return view('persona.cliente.index',["personas"=>$personas]);
+        $personas = Persona::all();
+        return view('persona.cliente.index',["personas"=>$personas]);
     
     }
     public function create()
@@ -67,6 +68,13 @@ class ClienteController extends Controller
         $persona->estado='Inactivo';
         $persona->update();
         return Redirect::to('persona/cliente');
+    }
+    public function listar_cliente(){
+        return view('persona.cliente.index');
+
+    }
+    public function data_cliente(){
+        return Datatables::of( Persona::where('tipo','=','Cliente')->get() ) ->make(true);
     }
     public function reporte(){
          //Obtenemos los registros

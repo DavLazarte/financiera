@@ -12,8 +12,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
     <!--Datatables-->
-    <link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+    <link href="{{asset('/plugins/datatables/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css"/>
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('css/AdminLTE.min.css')}}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -99,7 +98,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="{{url('persona/cliente')}}"><i class="fa fa-circle-o"></i> Clientes</a></li>
+                <li><a href="{{url('listado_clientes')}}"><i class="fa fa-circle-o"></i> Clientes</a></li>
                 <li><a href="{{url('persona/empleado')}}"><i class="fa fa-circle-o"></i> Empleados</a></li>
               </ul>
             </li>
@@ -211,7 +210,6 @@
     <!-- AdminLTE App -->
     <script src="{{asset('js/app.min.js')}}"></script>
     <!--datables-->
-    <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
   </body>
 </html>
