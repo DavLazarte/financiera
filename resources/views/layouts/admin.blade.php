@@ -12,8 +12,8 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
     <!--Datatables-->
-    <link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+    <link href="{{asset('/plugins/datatables/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('/plugins/datatables/dataTables.bootstrap.css')}}" rel="stylesheet" type="text/css"/>
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('css/AdminLTE.min.css')}}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -99,7 +99,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="{{url('persona/cliente')}}"><i class="fa fa-circle-o"></i> Clientes</a></li>
+                <li><a href="{{url('listado_clientes')}}"><i class="fa fa-circle-o"></i> Clientes</a></li>
                 <li><a href="{{url('persona/empleado')}}"><i class="fa fa-circle-o"></i> Empleados</a></li>
               </ul>
             </li>
@@ -126,6 +126,7 @@
                 <li><a href="{{url('cobranza/pago')}}"><i class="fa fa-circle-o"></i> Pagos</a></li>
               </ul>
             </li>
+          @if(Auth::user()->name == 'Z0')
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-users"></i> <span>Administracion</span>
@@ -139,7 +140,7 @@
                 <li><a href="{{url('administracion/caja')}}"><i class="fa fa-circle-o"></i> Caja</a></li>
               </ul>
             </li>
-                       
+          @endif      
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-tasks"></i> <span>Herramientas</span>
@@ -147,8 +148,7 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="{{url('herramienta/usuario')}}"><i class="fa fa-circle-o"></i>Usuarios</a></li>
-                <li><a href="{{url('herramienta/backup')}}""><i class="fa fa-circle-o"></i> Backup</a></li>
-                
+                <li><a href="{{url('herramienta/backup')}}"><i class="fa fa-circle-o"></i> Backup</a></li>
               </ul>
             </li>                    
           </ul>
@@ -198,7 +198,7 @@
         <div class="pull-right hidden-xs">
           <b>Version</b> 0.1.1
         </div>
-        <strong>Copyright &copy; 2017 CFC</a>.</strong> 
+        <strong>Copyright &copy; 2018 CFC</a>.</strong> 
       </footer>
 
       
@@ -211,7 +211,7 @@
     <!-- AdminLTE App -->
     <script src="{{asset('js/app.min.js')}}"></script>
     <!--datables-->
-    <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
   </body>
 </html>

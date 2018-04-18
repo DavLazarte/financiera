@@ -16,34 +16,32 @@
 		</div>
 	</div>
 			{!!Form::open(array('url'=>'administracion/liquidacion','method'=>'POST','autocomplete'=>'off'))!!}
-            {{Form::token()}}
-    <div class="row">
-    	
-    <div class="row">
-        <div class="panel panel-primary">
-            <div class="panel-body">
+            {{Form::token()}} 	
+<div class="row">
+    <div class="panel panel-primary">
+        <div class="panel-body">
             <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
-            <div class="form-group">
+             <div class="form-group">
                 <label for="empleado">Empleado</label>
                 <select name="empleado" id="empleado" class="form-control selectpicker" data-live-search="true">
                     @foreach($empleados as $empleado)
                      <option value="{{$empleado->idpersona}}">{{$empleado->nombre_apellido}}</option>
                      @endforeach
                 </select>
+             </div>
             </div>
-        </div>
-                <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
-                    <div class="form-group">
-                        <label for="periodo">Periodo</label>
-                        <input type="text" name="periodo" id="pperiodo" class="form-control">
-                    </div>
+            <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+                <div class="form-group">
+                    <label for="periodo">Periodo</label>
+                    <input type="text" name="periodo" id="pperiodo" class="form-control">
                 </div>
-                <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
-                    <div class="form-group">
-                        <label for="fecha_inicio">Inicio</label>
-                        <input type="date"  name="fecha_inicio" id="pinicio" class="form-control">
-                    </div>
+            </div>
+            <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+                <div class="form-group">
+                    <label for="fecha_inicio">Inicio</label>
+                    <input type="date"  name="fecha_inicio" id="pinicio" class="form-control">
                 </div>
+            </div>
                 <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
                     <div class="form-group">
                         <label for="fecha_fin">Fin</label>
@@ -127,19 +125,17 @@
                             
                         </tbody>
                     </table>
-                 </div>
-            </div>
-       
-            </div>
+                </div>
+        </div> 
+    </div>
+        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12" id="guardar">
+    	<div class="form-group">
+            <input name"_token" value="{{ csrf_token() }}" type="hidden"></input>
+            <button class="btn btn-primary" type="submit">Guardar</button>
+            <button class="btn btn-danger" type="reset">Cancelar</button>
         </div>
-    	<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12" id="guardar">
-    		<div class="form-group">
-            	<input name"_token" value="{{ csrf_token() }}" type="hidden"></input>
-              <button class="btn btn-primary" type="submit">Guardar</button>
-            	<button class="btn btn-danger" type="reset">Cancelar</button>
-            </div>
-    	</div>
-    </div>   
+    </div>
+</div>   
 {!!Form::close()!!}		
 
 @push ('scripts')

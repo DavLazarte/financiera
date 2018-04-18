@@ -14,10 +14,14 @@
 			@endif
 		</div>
 	</div>
-			{!!Form::model($venta,['method'=>'PATCH','route'=>['venta.entrega.update',$venta->idventa]])!!}
-            {{Form::token()}}
+{!!Form::model($venta,['method'=>'PATCH','route'=>['venta.entrega.update',$venta->idventa]])!!}
+{{Form::token()}}
     <div class="row">
-        <div class="col-lg-1 col-sm-1 col-md-1 col-xs-12">
+        <div class="col-lg-9 col-sm-9 col-md-9 col-xs-12">
+            <div class="form-group">
+                <label for="fecha_hora">Inicio</label>
+                <input type="text"   name="fecha_hora" value="{{$venta->fecha_hora}}" class="form-control" >
+            </div>
             <div class="form-group">
                 <label for="zona">Zona</label>
                 <select name="zona" class="form-control">
@@ -80,142 +84,200 @@
                     @endif
                 </select>
             </div>
-        </div>
-        <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
             <div class="form-group">
                 <label for="cliente">Cliente</label>
                 <select name="cliente" id="cliente" class="form-control selectpicker" data-live-search="true">
                     @foreach($clientes as $cliente)
                      <option value="{{$cliente->idpersona}}">{{$cliente->nombre_apellido}}</option>
                     @endforeach
-
                 </select>
             </div>
-        </div>
-        <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
-            <div class="form-group">
-                <label for="empleado">Entrega</label>
-                <select name="empleado" class="form-control">
-                       @if ($venta->empleado =='dante')
-                       <option value="dante" selected>Dante</option>
-                       <option value="leo">Leo</option>
-                       <option value="david">David</option>
-                       @elseif ($venta->empleado =='leo')
-                       <option value="dante">Dante</option>
-                       <option value="leo" selected>Leo</option>
-                       <option value="david">David</option>
-                       @else 
-                       <option value="dante">Dante</option>
-                       <option value="leo">Leo</option>
-                       <option value="david" selected>David</option>
-                       @endif 
-                </select>
-            </div>
-        </div>
-        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
-            <div class="form-group">
-                <label for="fecha_hora">Inicio</label>
-                <input type="text"   name="fecha_hora" value="{{$venta->fecha_hora}}" class="form-control" >
-            </div>
-        </div>
-        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
             <div class="form-group">
                 <label for="monto">Monto</label>
                 <input type="text" name="monto" value="{{$venta->monto}}" class="form-control">
             </div>
-        </div>
-
-        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
             <div class="form-group">
                 <label for="plan">Plan</label>
-               <select name="plan" id="plan" class="form-control">
-                    @if ($venta->plan == 1)
-                   <option value="1" selected>26 dias</option>
-                   <option value="2">35 dias</option>
-                   <option value="3">4 semanas</option>
-                   <option value="4">5 semanas</option>
-                   <option value="5">6 semanas</option>
-                   <option value="6">Especial</option>
-                   @elseif ($venta->plan == 2 )
-                   <option value="1">26 dias</option>
-                   <option value="2" selected>35 dias</option>
-                   <option value="3">4 semanas</option>
-                   <option value="4">5 semanas</option>
-                   <option value="5">6 semanas</option>
-                   <option value="6">Especial</option>
-                   @elseif ($venta->plan == 3 )
-                   <option value="1">26 dias</option>
-                   <option value="2">35 dias</option>
-                   <option value="3" selected>4 semanas</option>
-                   <option value="4">5 semanas</option>
-                   <option value="5">6 semanas</option>
-                   <option value="6">Especial</option>
-                   @elseif ($venta->plan == 4 )
-                   <option value="1">26 dias</option>
-                   <option value="2">35 dias</option>
-                   <option value="3">4 semanas</option>
-                   <option value="4" selected>5 semanas</option>
-                   <option value="5">6 semanas</option>
-                   <option value="6">Especial</option>
-                   @elseif ($venta->plan == 5 )
-                   <option value="1">26 dias</option>
-                   <option value="2">35 dias</option>
-                   <option value="3">4 semanas</option>
-                   <option value="4">5 semanas</option>
-                   <option value="5" selected>6 semanas</option>
-                   <option value="6">Especial</option>
-                   @else
-                   <option value="1">26 dias</option>
-                   <option value="2">35 dias</option>
-                   <option value="3">4 semanas</option>
-                   <option value="4">5 semanas</option>
-                   <option value="5">6 semanas</option>
-                   <option value="6" selected>Especial</option>
-                   @endif
-               </select>
-            </div>
-        </div>
-        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+                   <select name="plan" id="plan" class="form-control">
+                        @if ($venta->plan == 1)
+                       <option value="1" selected>26 dias</option>
+                       <option value="2">35 dias</option>
+                       <option value="3">4 semanas</option>
+                       <option value="4">5 semanas</option>
+                       <option value="5">6 semanas</option>
+                       <option value="6">Especial</option>
+                       @elseif ($venta->plan == 2 )
+                       <option value="1">26 dias</option>
+                       <option value="2" selected>35 dias</option>
+                       <option value="3">4 semanas</option>
+                       <option value="4">5 semanas</option>
+                       <option value="5">6 semanas</option>
+                       <option value="6">Especial</option>
+                       @elseif ($venta->plan == 3 )
+                       <option value="1">26 dias</option>
+                       <option value="2">35 dias</option>
+                       <option value="3" selected>4 semanas</option>
+                       <option value="4">5 semanas</option>
+                       <option value="5">6 semanas</option>
+                       <option value="6">Especial</option>
+                       @elseif ($venta->plan == 4 )
+                       <option value="1">26 dias</option>
+                       <option value="2">35 dias</option>
+                       <option value="3">4 semanas</option>
+                       <option value="4" selected>5 semanas</option>
+                       <option value="5">6 semanas</option>
+                       <option value="6">Especial</option>
+                       @elseif ($venta->plan == 5 )
+                       <option value="1">26 dias</option>
+                       <option value="2">35 dias</option>
+                       <option value="3">4 semanas</option>
+                       <option value="4">5 semanas</option>
+                       <option value="5" selected>6 semanas</option>
+                       <option value="6">Especial</option>
+                       @else
+                       <option value="1">26 dias</option>
+                       <option value="2">35 dias</option>
+                       <option value="3">4 semanas</option>
+                       <option value="4">5 semanas</option>
+                       <option value="5">6 semanas</option>
+                       <option value="6" selected>Especial</option>
+                       @endif
+                   </select>
+                </div>
+                <div class="form-group">
+                    <label for="fecha_cancela">Cancelación</label>
+                    <input type="text"   name="fecha_cancela" value="{{$venta->fecha_cancela}}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="concepto">Concepto</label>
+                    <select name="concepto" class="form-control">
+                        @if ($venta->concepto=='nuevo')
+                           <option value="nuevo" selected>Nuevo</option>
+                           <option value="recuperacion">Recuperación</option>
+                           <option value="renovacion">Renovación</option>
+                           <option value="paralela">Paralela</option>
+                           <option value="especial">Especial</option>
+                        @elseif ($venta->concepto=='recuperacion')
+                            <option value="nuevo" >Nuevo</option>
+                           <option value="recuperacion" selected>Recuperación</option>
+                           <option value="renovacion">Renovación</option>
+                           <option value="paralela">Paralela</option>
+                           <option value="especial">Especial</option>
+                        @elseif ($venta->concepto=='renovacion')
+                            <option value="nuevo">Nuevo</option>
+                           <option value="recuperacion">Recuperación</option>
+                           <option value="renovacion" selected>Renovación</option>
+                           <option value="paralela">Paralela</option>
+                           <option value="especial">Especial</option>
+                        @elseif ($venta->concepto=='paralela')
+                            <option value="nuevo">Nuevo</option>
+                           <option value="recuperacion">Recuperación</option>
+                           <option value="renovacion">Renovación</option>
+                           <option value="paralela" selected>Paralela</option>
+                           <option value="especial">Especial</option>
+                        @else
+                            <option value="nuevo">Nuevo</option>
+                           <option value="recuperacion">Recuperación</option>
+                           <option value="renovacion">Renovación</option>
+                           <option value="paralela">Paralela</option>
+                           <option value="especial" selected>Especial</option>
+                        @endif
+                    </select>
+                </div>
             <div class="form-group">
-                <label for="fecha_cancela">Cancelación</label>
-                <input type="text"   name="fecha_cancela" value="{{$venta->fecha_cancela}}" class="form-control">
-            </div>
-        </div>
-        <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
-            <div class="form-group">
-                <label for="concepto">Concepto</label>
-                <select name="concepto" class="form-control">
-                    @if ($venta->concepto=='nuevo')
-                       <option value="nuevo" selected>Nuevo</option>
-                       <option value="recuperacion">Recuperación</option>
-                       <option value="renovacion">Renovación</option>
-                       <option value="paralela">Paralela</option>
-                       <option value="especial">Especial</option>
-                    @elseif ($venta->concepto=='recuperacion')
-                        <option value="nuevo" >Nuevo</option>
-                       <option value="recuperacion" selected>Recuperación</option>
-                       <option value="renovacion">Renovación</option>
-                       <option value="paralela">Paralela</option>
-                       <option value="especial">Especial</option>
-                    @elseif ($venta->concepto=='renovacion')
-                        <option value="nuevo">Nuevo</option>
-                       <option value="recuperacion">Recuperación</option>
-                       <option value="renovacion" selected>Renovación</option>
-                       <option value="paralela">Paralela</option>
-                       <option value="especial">Especial</option>
-                    @elseif ($venta->concepto=='paralela')
-                        <option value="nuevo">Nuevo</option>
-                       <option value="recuperacion">Recuperación</option>
-                       <option value="renovacion">Renovación</option>
-                       <option value="paralela" selected>Paralela</option>
-                       <option value="especial">Especial</option>
-                    @else
-                        <option value="nuevo">Nuevo</option>
-                       <option value="recuperacion">Recuperación</option>
-                       <option value="renovacion">Renovación</option>
-                       <option value="paralela">Paralela</option>
-                       <option value="especial" selected>Especial</option>
-                    @endif
+                <label for="empleado">Entrega</label>
+                <select name="empleado" class="form-control">
+                    @if ($venta->empleado =='dani')
+                        <option value="dani" selected>Dani Miranda</option>
+                        <option value="karina">Karina Fenoglio</option>
+                        <option value="leo">Leo Escobar</option>
+                        <option value="david">David Lazarte</option>
+                        <option value="veronica">Veronica Huerta</option>
+                        <option value="dante">Dante Miranda</option>
+                        <option value="dario">Dario Ogas</option>
+                        <option value="alvaro">Alvaro Nieva</option>
+                        <option value="santiago">Santiago Ruiz</option>
+                    @elseif ($venta->empleado =='karina')
+                        <option value="dani">Dani Miranda</option>
+                        <option value="karina" selected>Karina Fenoglio</option>
+                        <option value="leo">Leo Escobar</option>
+                        <option value="david">David Lazarte</option>
+                        <option value="veronica">Veronica Huerta</option>
+                        <option value="dante">Dante Miranda</option>
+                        <option value="dario">Dario Ogas</option>
+                        <option value="alvaro">Alvaro Nieva</option>
+                        <option value="santiago">Santiago Ruiz</option>
+                    @elseif ($venta->empleado =='leo')
+                        <option value="dani">Dani Miranda</option>
+                        <option value="karina">Karina Fenoglio</option>
+                        <option value="leo" selected>Leo Escobar</option>
+                        <option value="david">David Lazarte</option>
+                        <option value="veronica">Veronica Huerta</option>
+                        <option value="dante">Dante Miranda</option>
+                        <option value="dario">Dario Ogas</option>
+                        <option value="alvaro">Alvaro Nieva</option>
+                        <option value="santiago">Santiago Ruiz</option>
+                    @elseif ($venta->empleado =='david')
+                        <option value="dani">Dani Miranda</option>
+                        <option value="karina">Karina Fenoglio</option>
+                        <option value="leo">Leo Escobar</option>
+                        <option value="david" selected>David Lazarte</option>
+                        <option value="veronica">Veronica Huerta</option>
+                        <option value="dante">Dante Miranda</option>
+                        <option value="dario">Dario Ogas</option>
+                        <option value="alvaro">Alvaro Nieva</option>
+                        <option value="santiago">Santiago Ruiz</option>
+                    @elseif ($venta->empleado =='veronica')
+                        <option value="dani">Dani Miranda</option>
+                        <option value="karina">Karina Fenoglio</option>
+                        <option value="leo">Leo Escobar</option>
+                        <option value="david">David Lazarte</option>
+                        <option value="veronica" selected>Veronica Huerta</option>
+                        <option value="dante">Dante Miranda</option>
+                        <option value="dario">Dario Ogas</option>
+                        <option value="alvaro">Alvaro Nieva</option>
+                        <option value="santiago">Santiago Ruiz</option>
+                    @elseif ($venta->empleado =='dante')
+                        <option value="dani">Dani Miranda</option>
+                        <option value="karina">Karina Fenoglio</option>
+                        <option value="leo">Leo Escobar</option>
+                        <option value="david">David Lazarte</option>
+                        <option value="veronica">Veronica Huerta</option>
+                        <option value="dante" selected>Dante Miranda</option>
+                        <option value="dario">Dario Ogas</option>
+                        <option value="alvaro">Alvaro Nieva</option>
+                        <option value="santiago">Santiago Ruiz</option>
+                    @elseif ($venta->empleado =='dario')
+                        <option value="dani">Dani Miranda</option>
+                        <option value="karina">Karina Fenoglio</option>
+                        <option value="leo">Leo Escobar</option>
+                        <option value="david">David Lazarte</option>
+                        <option value="veronica">Veronica Huerta</option>
+                        <option value="dante">Dante Miranda</option>
+                        <option value="dario" selected>Dario Ogas</option>
+                        <option value="alvaro">Alvaro Nieva</option>
+                        <option value="santiago">Santiago Ruiz</option>
+                    @elseif ($venta->empleado =='alvaro')
+                        <option value="dani">Dani Miranda</option>
+                        <option value="karina">Karina Fenoglio</option>
+                        <option value="leo">Leo Escobar</option>
+                        <option value="david">David Lazarte</option>
+                        <option value="veronica">Veronica Huerta</option>
+                        <option value="dante">Dante Miranda</option>
+                        <option value="dario">Dario Ogas</option>
+                        <option value="alvaro" selected>Alvaro Nieva</option>
+                        <option value="santiago">Santiago Ruiz</option>
+                    @else 
+                       <option value="dani">Dani Miranda</option>
+                       <option value="karina">Karina Fenoglio</option>
+                       <option value="leo">Leo Escobar</option>
+                       <option value="david">David Lazarte</option>
+                       <option value="veronica">Veronica Huerta</option>
+                       <option value="dante">Dante Miranda</option>
+                       <option value="dario">Dario Ogas</option>
+                       <option value="alvaro">Alvaro Nieva</option>
+                       <option value="santiago" selected>Santiago Ruiz</option>
+                    @endif 
                 </select>
             </div>
         </div>

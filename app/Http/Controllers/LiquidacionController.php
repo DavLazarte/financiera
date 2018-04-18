@@ -24,6 +24,7 @@ class LiquidacionController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('caja');        
     }
     public function index(Request $request)
     {
@@ -103,7 +104,7 @@ class LiquidacionController extends Controller
             ->first();
 
         $detalles=DB::table('Detalle_liquidacion as d')
-          		->select('d.iddetalle_liquidacion','d.idliquidacion','d.zona','d.fecha_inicio','d.fecha_fin','d.cobranza','d..comision','d.anticipo','d.premio')
+          		->select('d.iddetalle_liquidacion','d.idliquidacion','d.zona','d.fecha_inicio','d.fecha_fin','d.cobranza','d.comision','d.anticipo','d.premio')
              	->where('d.idliquidacion','=',$id)
              	->get();
         return view("administracion.liquidacion.show",["liquidacion"=>$liquidacion,"detalles"=>$detalles]);

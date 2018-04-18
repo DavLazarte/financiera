@@ -1,5 +1,6 @@
 @extends ('layouts.admin')
 @section ('contenido')
+@include('alerts.errors')
 <div class="row">
     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
         <h3>Resumen General</h3>
@@ -73,7 +74,7 @@ foreach ($totales as $total)
                 <div class="icon">
                   <i class="ion ion-bag"></i>
                 </div>
-                <a href="{{url('ventas/entregas')}}" class="small-box-footer">Entregas<i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{url('venta/entrega')}}" class="small-box-footer">Entregas<i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div>
              <div class="col-lg-3 col-xs-6">
@@ -86,7 +87,7 @@ foreach ($totales as $total)
                 <div class="icon">
                   <i class="ion ion-bag"></i>
                 </div>
-                <a href="{{url('ventas/entregas')}}" class="small-box-footer">Entregas<i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{url('venta/entrega')}}" class="small-box-footer">Entregas<i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div>
              <div class="col-lg-3 col-xs-6">
@@ -99,7 +100,7 @@ foreach ($totales as $total)
                 <div class="icon">
                   <i class="ion ion-bag"></i>
                 </div>
-                <a href="{{url('ventas/entregas')}}" class="small-box-footer">Entregas<i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{url('venta/entrega')}}" class="small-box-footer">Entregas<i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div>
              <div class="col-lg-3 col-xs-6">
@@ -112,7 +113,7 @@ foreach ($totales as $total)
                 <div class="icon">
                   <i class="ion ion-bag"></i>
                 </div>
-                <a href="{{url('ventas/entregas')}}" class="small-box-footer">Entregas<i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{url('venta/entrega')}}" class="small-box-footer">Entregas<i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div>
             
@@ -121,8 +122,6 @@ foreach ($totales as $total)
 <?php }?>
 
 @push ('scripts')
-<script src="{{asset('js/Chart.js')}}"></script>
-
     <script>
       $('#liEstadistica').addClass("treeview active");
       $('#liEscritorio').addClass("active");

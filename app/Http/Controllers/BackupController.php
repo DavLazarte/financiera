@@ -22,7 +22,7 @@ class BackupController extends Controller
 
     public function index()
     {
-$con = mysqli_connect("localhost","root","","mwabd");
+$con = mysqli_connect("localhost","root","","conficreddatabase");
 
 $tables = array();
 $query = mysqli_query($con, 'SHOW TABLES');

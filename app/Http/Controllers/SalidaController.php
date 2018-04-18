@@ -25,6 +25,7 @@ class SalidaController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('caja');        
     }
     public function index(Request $request)
     {
@@ -52,7 +53,7 @@ class SalidaController extends Controller
         $salidas->monto=$request->get('monto');
         $salidas->concepto=$request->get('concepto');
         $salidas->observaciones=$request->get('observaciones');
-        $salidas->estado='activo';
+        $salidas->estado='Pendiente';
         $salidas->save();
         return Redirect::to('administracion/salida');
 

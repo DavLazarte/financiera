@@ -1,6 +1,5 @@
 @extends ('layouts.admin')
 @section ('contenido')
-   
 	<div class="row">
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 			<h3>Caja Diaria</h3>
@@ -8,17 +7,15 @@
 			<div class="alert alert-danger">
 				<ul>
 				@foreach ($errors->all() as $error)
-					<li>{{$error}}</li>
+				 <li>{{$error}}</li>
 				@endforeach
 				</ul>
 			</div>
 			@endif
 		</div>
 	</div>
-			{!!Form::open(array('url'=>'administracion/caja','method'=>'POST','autocomplete'=>'off'))!!}
-            {{Form::token()}}
-    <div class="row">
-    	
+	{!!Form::open(array('url'=>'administracion/caja','method'=>'POST','autocomplete'=>'off'))!!}
+    {{Form::token()}}    	
     <div class="row">
         <div class="panel panel-primary">
             <div class="panel-body">
@@ -35,14 +32,14 @@
                 <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
                     <div class="form-group">
                         <label for="ingreso">Ingreso</label>
-                        <input type="text"  disabled name="idingreso" id="pidingreso" class="form-control">
+                        <input type="text"   name="idingreso" id="pidingreso" class="form-control">
                     </div>
                 </div>
             
                 <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
                     <div class="form-group">
                         <label for="montoingreso">Monto ingreso</label>
-                        <input type="number" disabled name="montoingreso" id="pmontoingreso" class="form-control">
+                        <input type="number"  name="montoingreso" id="pmontoingreso" class="form-control">
                     </div>
                 </div>
                  <div class="col-lg-1 col-sm-1 col-md-1 col-xs-12">
@@ -58,20 +55,20 @@
                 <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
                     <div class="form-group">
                         <label for="salida">Salida</label>
-                        <input type="text"  disabled name="idsalida" id="pidsalida" class="form-control">
+                        <input type="text"   name="idsalida" id="pidsalida" class="form-control">
                     </div>
                 </div>
                 <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
                     <div class="form-group">
                         <label for="montosalida">Monto salida</label>
-                        <input type="number" disabled name="montosalida" id="pmontosalida" class="form-control">
+                        <input type="number"  name="montosalida" id="pmontosalida" class="form-control">
                     </div>
                 </div>
               
                 <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
                     <div class="form-group">
                         <label for="concepto">Concepto</label>
-                        <input type="text" disabled name="concepto" id="pconcepto" class="form-control">
+                        <input type="text"  name="concepto" id="pconcepto" class="form-control">
                     </div>
                 </div>
                 <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
@@ -119,21 +116,20 @@
                     </table>
                  </div>
             </div>
-       
+        </div>
+    </div>
+        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12" id="nuevototal">
+            <div class="form-group" >
+                <button type="button" id="bt_total" class="btn btn-success" >Cerrar Caja</button>
             </div>
         </div>
-      <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12" id="nuevototal">
-      <div class="form-group" >
-            <button type="button" id="bt_total" class="btn btn-success" >Cerrar Caja</button>
-    </div>
-     </div>
-    	<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12" id="guardar">
-    		<div class="form-group">
-            	<input name"_token" value="{{ csrf_token() }}" type="hidden"></input>
-              <button class="btn btn-primary" type="submit">Guardar</button>
-            	<button class="btn btn-danger" type="reset">Cancelar</button>
+        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12" id="guardar">
+            <div class="form-group">
+                <input name"_token" value="{{ csrf_token() }}" type="hidden"></input>
+                <button class="btn btn-primary" type="submit">Guardar</button>
+                <button class="btn btn-danger" type="reset">Cancelar</button>
             </div>
-    	</div>
+        </div>
     </div>   
 {!!Form::close()!!}		
 
@@ -173,19 +169,18 @@
 
   function agregar()
   {
-
     datosIngreso=document.getElementById('pzonaingreso').value.split('_');
     datosSalida=document.getElementById('pzonasalida').value.split('_')
+ 
+    zonaingreso  = datosIngreso[0];
+    ingreso      = $("#pidingreso").val();
+    montoingreso = $("#pmontoingreso").val();
+    zonasalida   = datosSalida[0];
+    salida       = $("#pidsalida").val();
+    montosalida  = $("#pmontosalida").val();
+    concepto     = $("#pconcepto").val();
 
-    zonaingreso=datosIngreso[0];
-    ingreso=$("#pidingreso").val();
-    montoingreso=$("#pmontoingreso").val();
-    zonasalida=datosSalida[0];
-    salida=$("#pidsalida").val();
-    montosalida=$("#pmontosalida").val();
-    concepto=$("#pconcepto").val();
-
-    if (zonaingreso!="" && ingreso!=""  && montoingreso!="")
+    if (zonaingreso!="" || zonasalida!="")
     {
 
         var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="zonaingreso[]" value="'+zonaingreso+'">'+zonaingreso+'</td><td><input type="text" name="ingreso[]" value="'+ingreso+'"></td><td><input type="number" name="montoingreso[]" value="'+parseFloat(montoingreso).toFixed(2)+'"></td><td><input type="hidden" name="zonasalida[]" value="'+zonasalida+'">'+zonasalida+'</td><td><input type="text" name="salida[]" value="'+salida+'"></td><td><input type="number" name="montosalida[]" value="'+parseFloat(montosalida).toFixed(2)+'"></td><td><input type="text" name="concepto[]" value="'+concepto+'"></td></tr>';

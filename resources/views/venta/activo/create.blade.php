@@ -6,9 +6,9 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" 
                 aria-label="Close">
-                     <span aria-hidden="true">×</span>
+                <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title">Cargar Credito</h4>
+                <h4 class="modal-title">Activar Credito</h4>
             </div>
             <div class="modal-body">
                 <label>ESTE CREDITO SE ENCUENTRA:{{$ven->estado}}</label><br>
@@ -18,7 +18,7 @@
                 <input type="hidden" name="cliente" id="cliente" value="{{$ven->nombre_apellido}} ">
                 <input type="hidden" name="saldo" id="saldo" value="{{$ven->monto}}">
                 <input type="hidden" name="proyeccion" id="proyeccion" value="{{$ven->plan}}">
-                <input type="hidden" name="vencimiento" id="vencimiento" value="0">
+                <input type="hidden" name="vencimiento" id="vencimiento" value="{{$ven->fecha_cancela}}">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" id="cerrar">Cerrar</button>
@@ -26,16 +26,11 @@
             </div>
         </div>
     </div>
-    {!!Form::Close()!!}
-    @push ('scripts')
+{!!Form::Close()!!}
+@push ('scripts')
 <script>
-
-
 $('#liVentas').addClass("treeview active");
 $('#liVentass').addClass("active");
-  
 </script>
-
-
 @endpush    
 </div>

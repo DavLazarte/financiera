@@ -31,7 +31,7 @@
 					<td>{{ Carbon\Carbon::parse($act->vencimiento)->format('d-m-Y')}}</td>
 					<td>{{ $act->estado}}</td>
 					<td>
-						<a href="{{URL::action('ActivoController@edit',$act->idcredito)}}"><button class="btn btn-info">Editar</button></a>
+						<a href="{{URL::action('ActivoController@edit',$act->idcredito)}}"><button class="btn btn-info">Actualizar Saldo</button></a>
 						<a href="" data-target="#modal-create-{{$act->idcredito}}" data-toggle="modal"><button class="btn btn-primary">Refinanciar</button></a>
                          <a href="" data-target="#modal-delete-{{$act->idcredito}}" data-toggle="modal"><button class="btn btn-danger">Estados</button></a>
 					</td>

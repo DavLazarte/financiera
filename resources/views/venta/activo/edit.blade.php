@@ -18,37 +18,29 @@
 {{Form::token()}}
 <div class="row">
 
-        <div class="col-lg-1 col-sm-1 col-md-1 col-xs-12">
+        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
                 <label for="zona">Zona</label>
                 <input type="text" name="zona" id="zona" value="{{$activo->zona}}" class="form-control">
             </div>
-        </div>
-        <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
             <div class="form-group">
                 <label for="cliente">Cliente</label>
                 <input type="text" name="cliente" id="cliente" value="{{$activo->cliente}}" class="form-control">
             </div>
-        </div>
-        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
             <div class="form-group">
                 <label for="saldo">Saldo</label>
                 <input type="text" name="saldo" id="saldo" value="{{$activo->saldo}}" class="form-control" >
             </div>
-        </div>
-        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
             <div class="form-group">
                 <label for="proyeccion">Proyección</label>
                 <input type="text" name="proyeccion" id="proyeccion" value="{{$activo->proyeccion}}" class="form-control">
             </div>
-        </div>
-        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
             <div class="form-group">
                 <label for="vencimiento">Cancelación</label>
-                <input type="date"   name="vencimiento" value="{{$activo->vencimiento}}" class="form-control">
+                <input type="text"   name="vencimiento" value="{{$activo->vencimiento}}" class="form-control">
             </div>
         </div>
-        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+        <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12">
             <div class="form-group" id="botones">
                 <button class="btn btn-primary" type="submit">Guardar</button>
                 <button class="btn btn-danger" type="reset">Cancelar</button>
@@ -123,19 +115,14 @@ var calculo = function(){
                     case 6:
                         alert('Ingrese el saldo y la Proyeccion Manualmente');
                         $("#botones").show();
+                        $("#actualizar").hide();                        
                         break;
                 }
-                
-                
-
                 $("#botones").show();
+                $("#actualizar").hide();
         }
-
-
 $('#liactivos').addClass("treeview active");
 $('#liactivoes').addClass("active");
-  
 </script>
-
 @endpush    
 @endsection

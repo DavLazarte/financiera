@@ -38,7 +38,7 @@ public function __construct()
             ->orwhere('c.fecha_hora','LIKE','%'.$query.'%')
             ->orwhere('c.zona','LIKE','%'.$query.'%')
             ->orderBy('idcobranza','desc')
-            ->paginate(7);
+            ->paginate(10);
             return view('cobranza.pago.index',["pagos"=>$pagos,"searchText"=>$query]);
         }
     }
@@ -46,7 +46,7 @@ public function __construct()
     {
     	$creditos=DB::table('activo as a')
     	->join('persona as p','a.cliente','=','p.nombre_apellido')
-    	->select('p.nombre_apellido','a.cliente','a.idcredito')
+    	->select('p.nombre_apellido','a.cliente','a.idcredito','a.zona','a.saldo','a.proyeccion','a.vencimiento','a.estado')
     	->where('a.estado','=','Activo')
         ->orwhere('a.estado','=','Refinanciado')
     	->get();
@@ -107,7 +107,7 @@ public function __construct()
             ->join('venta as v','c.idventa','=','v.idventa')
             ->join('persona as p','v.idpersona','=','p.idpersona')
             ->select('c.idcobranza','c.idventa','c.fecha_hora','c.zona','p.nombre_apellido','c.monto','c.estado')
-            ->orderBy('idcobranza','desc')
+            ->orderBy('idcobranza','asc')
             ->get();
 
          $pdf = new Fpdf();
@@ -162,7 +162,7 @@ public function __construct()
             ->orwhere('c.idventa','LIKE','%'.$searchText.'%')
             ->orwhere('c.fecha_hora','LIKE','%'.$searchText.'%')
             ->orwhere('c.zona','LIKE','%'.$searchText.'%')
-            ->orderBy('idcobranza','desc')
+            ->orderBy('idcobranza','asc')
             ->get();
 
          $pdf = new Fpdf();

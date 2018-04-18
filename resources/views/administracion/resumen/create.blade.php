@@ -14,8 +14,8 @@
 			@endif
 		</div>
 	</div>
-			{!!Form::open(array('url'=>'administracion/resumen','method'=>'POST','autocomplete'=>'off'))!!}
-            {{Form::token()}}
+	{!!Form::open(array('url'=>'administracion/resumen','method'=>'POST','autocomplete'=>'off'))!!}
+    {{Form::token()}}
 <?php 
 foreach ($totales as $total)
 {
@@ -32,6 +32,7 @@ foreach ($totales as $total)
                        <option value="Z4">Z4</option>
                        <option value="Z5">Z5</option>
                        <option value="Z6">Z6</option>
+                       <option value="Z7">Z7</option>
                 </select>
             </div>
         </div>
@@ -46,6 +47,7 @@ foreach ($totales as $total)
                 <input type="hidden" id="iz4" value="<?php echo $total->ingresoz4;?>">
                 <input type="hidden" id="iz5" value="<?php echo $total->ingresoz5;?>">
                 <input type="hidden" id="iz6" value="<?php echo $total->ingresoz6;?>">
+                <input type="hidden" id="iz7" value="<?php echo $total->ingresoz7;?>">
             </div>
         </div>
         <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
@@ -59,6 +61,7 @@ foreach ($totales as $total)
                 <input type="hidden" id="sz4" value="<?php echo $total->salidaz4;?>">
                 <input type="hidden" id="sz5" value="<?php echo $total->salidaz5;?>">
                 <input type="hidden" id="sz6" value="<?php echo $total->salidaz6;?>">
+                <input type="hidden" id="sz7" value="<?php echo $total->salidaz7;?>">
             </div>
         </div>
         <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
@@ -72,6 +75,7 @@ foreach ($totales as $total)
                 <input type="hidden" id="az4" value="<?php echo $total->anticipoz4;?>">
                 <input type="hidden" id="az5" value="<?php echo $total->anticipoz5;?>">
                 <input type="hidden" id="az6" value="<?php echo $total->anticipoz6;?>">
+                <input type="hidden" id="az7" value="<?php echo $total->anticipoz7;?>">
             </div>
         </div>
                 
@@ -153,6 +157,15 @@ var cargar = function(){
             var ingreso=document.getElementById('iz6').value;
             var salida=document.getElementById('sz6').value;
             var anticipo=document.getElementById('az6').value;
+            $("#pingreso").val(ingreso);
+            $("#psalida").val(salida);
+            $("#panticipo").val(anticipo);
+            $("#botones").show();
+    }
+    if (zona=="Z7") {
+            var ingreso=document.getElementById('iz7').value;
+            var salida=document.getElementById('sz7').value;
+            var anticipo=document.getElementById('az7').value;
             $("#pingreso").val(ingreso);
             $("#psalida").val(salida);
             $("#panticipo").val(anticipo);
