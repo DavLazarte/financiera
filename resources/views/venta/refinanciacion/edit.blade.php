@@ -22,11 +22,8 @@
                 <label for="cliente">Cliente</label>
                 <input type="text" name="cliente" id="cliente" value="{{$refinanciacion->cliente}}" class="form-control">
             </div>
-        </div>
-
-        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
             <div class="form-group">
-                <label for="plan">Plan</label>
+               <label for="plan">Plan</label>
                <select name="plan" id="plan" class="form-control">
                    <option value="o">Plan</option>
                    <option value="1">26 dias</option>
@@ -37,22 +34,16 @@
                    <option value="6">Especial</option>
                </select>
             </div>
-        </div>
-
-        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
             <div class="form-group">
                 <label for="saldo">Saldo</label>
                 <input type="text" name="saldo" id="saldo" value="{{$refinanciacion->saldo}}" class="form-control" >
             </div>
-        </div>
-        
-        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
             <div class="form-group">
                 <label for="vencimiento">Cancelación</label>
                 <input type="date"   name="vencimiento" value="{{$refinanciacion->vencimiento}}" class="form-control">
             </div>
         </div>
-        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+        <div class="col-lg-9 col-sm-9 col-md-9 col-xs-12">
             <div class="form-group" id="botones">
                 <button class="btn btn-primary" type="submit">Guardar</button>
                 <button class="btn btn-danger" type="reset">Cancelar</button>
@@ -115,12 +106,11 @@ var calculo = function(){
                     case 6:
                         alert('Ingrese el saldo');
                         $("#botones").show();
+                        $("#actualizar").hide();
                         break;
                 }
-                
-                
-
                 $("#botones").show();
+                $("#actualizar").hide();
         }
 
 

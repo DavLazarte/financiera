@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
     <!--Datatables-->
     <link href="{{asset('/plugins/datatables/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('/plugins/datatables/dataTables.bootstrap.css')}}" rel="stylesheet" type="text/css"/>
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('css/AdminLTE.min.css')}}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -211,5 +212,6 @@
     <script src="{{asset('js/app.min.js')}}"></script>
     <!--datables-->
     <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
   </body>
 </html>

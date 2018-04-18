@@ -2,7 +2,7 @@
 @section ('contenido')
 <div class="row">
 	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-		<h3>Listado de Clientes <a href="cliente/create"><button class="btn btn-success">Nuevo</button></a> <a href="{{url('reporteclientes')}}" target="_blank"><button class="btn btn-info">Reporte</button></a></h3>
+		<h3>Listado de Clientes <a href="{{url('persona/cliente/create')}}"><button class="btn btn-success">Nuevo</button></a> <a href="{{url('reporteclientes')}}" target="_blank"><button class="btn btn-info">Reporte</button></a></h3>
 	</div>
 </div>
 
@@ -33,7 +33,6 @@ $(document).ready(function(){
 	$('#tabla_clientes').DataTable({
 		processing: true,
 		serverSide: true,
-		pageLength: 20,
 		language: {
 			     "url": '{!! asset('plugins/datatables/latino.json')  !!}'
 			       } ,
