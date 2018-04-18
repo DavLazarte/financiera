@@ -46,7 +46,7 @@
 				@endforeach
 			</table>
 		</div>
-		{{$ventas->render()}}
+		{{ $ventas->links() }}
 	</div>
 </div>
 @push ('scripts')

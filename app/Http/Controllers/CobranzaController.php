@@ -38,7 +38,7 @@ public function __construct()
             ->orwhere('c.fecha_hora','LIKE','%'.$query.'%')
             ->orwhere('c.zona','LIKE','%'.$query.'%')
             ->orderBy('idcobranza','desc')
-            ->paginate(7);
+            ->paginate(10);
             return view('cobranza.pago.index',["pagos"=>$pagos,"searchText"=>$query]);
         }
     }

@@ -39,7 +39,7 @@ class VentaController extends Controller
             ->orwhere('v.fecha_cancela','LIKE','%'.$query.'%')
             ->orwhere('idventa','LIKE','%'.$query.'%')
             ->orderBy('idventa','desc')
-            ->paginate(7);
+            ->simplePaginate(5);
             return view('venta.entrega.index',["ventas"=>$ventas,"searchText"=>$query]);
         }
     }
