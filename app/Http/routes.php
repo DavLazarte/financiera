@@ -58,6 +58,7 @@ Route::get('reporteliquidaciones/{searchText}', 'LiquidacionController@reporte')
 Route::get('reporteliquidaciones', 'LiquidacionController@report');
 Route::get('reporteliquidacion/{id}', 'LiquidacionController@reportec');
 Route::get('editar_cliente/{id}', 'ClienteController@edit');
+Route::get('eliminar_cliente/{id}', 'ClienteController@destroy');
 
 //datatables
 Route::resource('listado_clientes','ClienteController@listar_cliente');

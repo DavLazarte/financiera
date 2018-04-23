@@ -30,7 +30,7 @@
 					<td>{{ $per->estado}}</td>
 					<td>
 						<a href="{{URL::action('EmpleadoController@edit',$per->idpersona)}}"><button class="btn btn-info">Editar</button></a>
-                         <a href="" data-target="#modal-delete-{{$per->idpersona}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
+                        <a href="" data-target="#modal-delete-{{$per->idpersona}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
 					</td>
 				</tr>
 				@include('persona.empleado.modal')

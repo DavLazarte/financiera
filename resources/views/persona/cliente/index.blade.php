@@ -5,25 +5,21 @@
 		<h3>Listado de Clientes <a href="{{url('persona/cliente/create')}}"><button class="btn btn-success">Nuevo</button></a> <a href="{{url('reporteclientes')}}" target="_blank"><button class="btn btn-info">Reporte</button></a></h3>
 	</div>
 </div>
-
 <div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="table-responsive">
 			<table class="table table-striped table-bordered table-condensed table-hover" id="tabla_clientes">
 				<thead>
-					<th>Id</th>
-					<th>Nombre</th>
-					<th>DNI</th>
-					<th>Teléfono</th>
-					<th>Domicilio</th>
-					<th>Estado</th>
-					<th>Opciones</th>
-				</thead>
-               
-				
+				  <th>Id</th>
+				  <th>Nombre</th>
+				  <th>DNI</th>
+				  <th>Teléfono</th>
+				  <th>Domicilio</th>
+				  <th>Estado</th>
+				  <th>Opciones</th>
+				</thead>	
 			</table>
 		</div>
-		
 	</div>
 </div>
 @push ('scripts')
@@ -45,7 +41,8 @@ $(document).ready(function(){
 			{ data: 'domicilio', name: 'domicilio' },
 			{ data: 'estado', name:'estado' },
 			{ data: null, render: function ( data, type, row ) {
-				return "<a href='{{ url('editar_cliente/') }}/"+ data.idpersona +"' <button class='btn btn-info btn-sm'>Editar</button></a>" }
+				return "<a href='{{ url('editar_cliente/') }}/"+ data.idpersona +"' <button class='btn btn-info btn-sm'>Editar</button></a><a href='{{ url('eliminar_cliente/') }}/"+ data.idpersona +"' <button class='btn btn-danger btn-sm'>Eliminar</button></a>" 
+				}
 			}
 		]
 	});
