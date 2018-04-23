@@ -62,6 +62,7 @@ class ClienteController extends Controller
         $persona->update();
         return Redirect::to('persona/cliente');
     }
+
     public function destroy($id)
     {
         $persona=Persona::findOrFail($id);
@@ -74,7 +75,11 @@ class ClienteController extends Controller
 
     }
     public function data_cliente(){
-        return Datatables::of( Persona::where('tipo','=','Cliente')->get() ) ->make(true);
+        $persona=Persona::where([
+            ['tipo','=','Cliente'],
+            ['estado','=', 'Activo']
+            ])->get();
+        return Datatables::of($persona)->make(true);
     }
     public function reporte(){
          //Obtenemos los registros

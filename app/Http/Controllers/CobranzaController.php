@@ -74,7 +74,7 @@ public function __construct()
     {
         $creditos=DB::table('activo as a')
         ->join('persona as p','a.cliente','=','p.nombre_apellido')
-        ->select('p.nombre_apellido','a.cliente','a.idcredito')
+    	->select('p.nombre_apellido','a.cliente','a.idcredito','a.zona','a.saldo','a.proyeccion','a.vencimiento','a.estado')       
         ->where('a.estado','=','Activo')
         ->orwhere('a.estado','=','Refinanciado')
         ->get();
