@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Input;
 use ConfiSis\Http\Requests\VentaFormRequest;
 use ConfiSis\Venta;
 use DB;
+use Datatables;
 
 use Fpdf;
 
@@ -99,9 +100,26 @@ class VentaController extends Controller
     {
     //cambiar los tipos de estados
         $venta=Venta::findOrFail($id);
-        $venta->estado='Activo';
+        $venta->estado='Cancelado';
         $venta->update();
         return Redirect::to('venta/entrega');
+    }
+    public function listar_entrega(){
+        return view('venta.entrega.index');
+
+    }
+    public function data_entrega(){
+        $venta=Venta::join('persona', 'venta.idpersona','=','persona.idpersona')
+              ->select('venta.idventa','venta.fecha_hora','venta.zona','venta.idpersona','persona.nombre_apellido','venta.monto','venta.plan','venta.fecha_cancela','venta.concepto','venta.empleado','venta.estado')
+              ->where('venta.estado','!=','Cancelado');
+        return Datatables::of($venta)
+             ->editColumn('fecha_hora', function($venta){
+                 return $venta->fecha_hora ? with(new Carbon($venta->fecha_hora))->format('m/d/Y') : '';
+             })
+             ->editColumn('fecha_cancela', function($venta){
+                return $venta->fecha_cancela ? with(new Carbon($venta->fecha_cancela))->format('m/d/Y') : '';
+            })
+        ->make(true);
     }
     public function reporte(){
          //Obtenemos los registros

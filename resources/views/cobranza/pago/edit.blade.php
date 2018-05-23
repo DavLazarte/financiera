@@ -118,7 +118,7 @@
     <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
         <div class="form-group">
             <label for="fecha">Fecha</label>
-            <input type="date" name="fecha_hora" value="{{$cobranza->fecha_hora}}" class="form-control">
+            <input type="text" name="fecha_hora" value="{{$cobranza->fecha_hora}}" class="form-control">
         </div>
     </div>
 </div>
@@ -184,11 +184,10 @@ $('#licobranzas').addClass("treeview active");
 $('#liClientes').addClass("active");
 </script>
 <script>
-    $("#datoscredito").hide();
-    $("#pcredito").change(mostrarCredito);
-
-    function mostrarCredito(){
-       datosCreditos=document.getElementById('pcredito').value.split('_')
+    //$("#pcredito").change(mostrarCredito);
+function mostrarCredito() {
+    $(document).ready(function(){
+        datosCreditos=document.getElementById('pcredito').value.split('_')
         $("#id").val(datosCreditos[0]);
         $("#pzona").val(datosCreditos[1]);
         $("#pcliente").val(datosCreditos[2]);
@@ -196,9 +195,9 @@ $('#liClientes').addClass("active");
         $("#proyeccion").val(datosCreditos[4]);
         $("#vencimiento").val(datosCreditos[5]);
         $("#estado").val(datosCreditos[6]);
-        $("#datoscredito").show();    
-
+    });
 }
+mostrarCredito();
 </script>
 @endpush
 @endsection

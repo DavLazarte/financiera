@@ -59,7 +59,12 @@ Route::get('reporteliquidaciones', 'LiquidacionController@report');
 Route::get('reporteliquidacion/{id}', 'LiquidacionController@reportec');
 Route::get('editar_cliente/{id}', 'ClienteController@edit');
 Route::get('eliminar_cliente/{id}', 'ClienteController@destroy');
+Route::get('editar_entrega/{id}', 'VentaController@edit');
+Route::get('eliminar_entrega/{id}', 'VentaController@destroy');
+Route::get('activar_entrega/{id}', 'ActivoController@create');
 
 //datatables
 Route::resource('listado_clientes','ClienteController@listar_cliente');
 Route::resource('listado_clientes_data','ClienteController@data_cliente');
+Route::resource('listado_entrega','VentaController@listar_entrega');
+Route::resource('listado_entregas_data','VentaController@data_entrega');

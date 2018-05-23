@@ -23,7 +23,7 @@
     <link rel="shortcut icon" href="{{asset('img/favicon.ico')}}">
 
   </head>
-  <body class="hold-transition skin-blue sidebar-mini">
+  <body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
     <div class="wrapper">
 
       <header class="main-header">
@@ -111,7 +111,7 @@
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="{{url('venta/entrega')}}"><i class="fa fa-circle-o"></i>Entregas</a></li>
+                <li><a href="{{url('listado_entrega')}}"><i class="fa fa-circle-o"></i>Entregas</a></li>
                 <li><a href="{{url('venta/activo')}}"><i class="fa fa-circle-o"></i>Activos</a></li>
                  <li><a href="{{url('venta/refinanciacion')}}"><i class="fa fa-circle-o"></i>Refinanciaciones</a></li>
               </ul>
@@ -213,5 +213,6 @@
     <!--datables-->
     <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
+    
   </body>
 </html>

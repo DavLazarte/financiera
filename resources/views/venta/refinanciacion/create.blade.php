@@ -17,7 +17,7 @@
                 <input type="hidden" name="cliente" id="cliente" value="{{$act->cliente}} ">
                 <input type="hidden" name="saldo" id="saldo" value="{{$act->saldo}}">
                 <input type="hidden" name="plan" id="plan" value="0">
-                
+
                 <input type="hidden" name="vencimiento" id="vencimiento" value="0">
             </div>
 
