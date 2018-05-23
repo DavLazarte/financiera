@@ -32,6 +32,7 @@
 function activar_tabla_entregas() {
 $(document).ready(function(){
 	$('#tabla_entrega').DataTable({
+		order: [[ 0, "desc" ]],
 		processing: true,
 		serverSide: true,
 		language: {
