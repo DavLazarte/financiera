@@ -2,7 +2,8 @@
 @section ('contenido')
 	<div class="row">
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-			<h3>Cargar Nueva Entrega</h3>
+			<h3>Cargar Nueva Entrega <a href="" data-target="#modal-cliente" data-toggle="modal"><button class="btn btn-success">Agregar Cliente</button></a> </h3>
+            @include('persona.cliente.create')
 			@if (count($errors)>0)
 			<div class="alert alert-danger">
 				<ul>
