@@ -31,6 +31,10 @@ $(document).ready(function(){
 		processing: true,
 		serverSide: true,
 		order: [[ 0, "desc" ]],
+		dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
 		language: {
 			     "url": '{!! asset('plugins/datatables/latino.json')  !!}'
 			       } ,
