@@ -14,6 +14,7 @@
     <!--Datatables-->
     <link href="{{asset('/plugins/datatables/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('/plugins/datatables/dataTables.bootstrap.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('/plugins/datatables/buttons.dataTables.min.css')}}" rel="stylesheet" type="text/css"/>
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('css/AdminLTE.min.css')}}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -94,7 +95,7 @@
             </li>
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-archive"></i>
+                <i class="fa fa-user"></i>
                 <span>Personas</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
@@ -213,6 +214,13 @@
     <!--datables-->
     <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables/dataTables.button.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables/buttons.flash.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables/jszip.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables/pdfmake.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables/vfs_fonts.js')}}"></script>
+    <script src="{{asset('plugins/datatables/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables/buttons.print.min.js')}}"></script>
     
   </body>
 </html>

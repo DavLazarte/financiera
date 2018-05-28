@@ -25,7 +25,24 @@ class VentaController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index(Request $request)
+    //index datatable
+    public function listar_entrega(){
+        return view('venta.entrega.index');
+    }
+    public function data_entrega(){
+        $venta = Venta::join('persona', 'venta.idpersona','=','persona.idpersona')
+            ->select('venta.idventa','venta.fecha_hora','venta.zona','venta.idpersona','persona.nombre_apellido','venta.monto','venta.plan','venta.fecha_cancela','venta.concepto','venta.empleado','venta.estado')
+            ->where('venta.estado','!=','Cancelado');
+            return Datatables::of($venta)
+            ->editColumn('fecha_hora', function($venta) {
+            return $venta->fecha_hora ? with(new Carbon($venta->fecha_hora))->format('m/d/Y') : '';
+            })
+            ->editColumn('fecha_cancela', function($venta) {
+            return $venta->fecha_cancela ? with(new Carbon($venta->fecha_cancela))->format('m/d/Y') : '';
+            })
+            ->make(true);
+    }
+    /*public function index(Request $request)
     {
         if ($request)
         {
@@ -43,17 +60,22 @@ class VentaController extends Controller
             ->simplePaginate(5);
             return view('venta.entrega.index',["ventas"=>$ventas,"searchText"=>$query]);
         }
-    }
+    }*/
     public function create()
     {
-    	$clientes=DB::table('persona')->where('tipo','=','Cliente')
+    	$clientes = DB::table('persona')->where('tipo','=','Cliente')
     	->get();
         return view("venta.entrega.create",["clientes"=>$clientes]);
     }
     public function store (VentaFormRequest $request)
     {
-        /*$venta=new Venta;
-
+        if($request->ajax()){
+            Venta::create($request->all());
+            return response()->json([
+                "mensaje" => "creado"
+            ]);
+        }
+        /* store sin ajax $venta=new Venta;
         $venta->fecha_hora    = $request->get('fecha_hora');
         $venta->zona          = $request->get('zona');
         $venta->idpersona     = $request->get('cliente');
@@ -65,62 +87,37 @@ class VentaController extends Controller
         $venta->estado        = 'Pendiente';       
         $venta->save();
         return Redirect::to('venta/entrega');*/
-        if($request->ajax()){
-            Venta::create($request->all());
-            return response()->json([
-                "mensaje" => "creado"
-            ]);
-        }
-
     }
     public function edit($id)
     {
-        $clientes=DB::table('persona')->where('tipo','=','Cliente')
-        ->get();
-        return view("venta.entrega.edit",["clientes"=>$clientes,"venta"=>Venta::findOrFail($id)]);
+        $clientes = Persona::where('tipo','=','Cliente')->get();
+        $venta    = Venta::findOrFail($id);
+        return view("venta.entrega.edit",["clientes"=>$clientes,"venta"=>$venta]);
     }
     public function update(VentaFormRequest $request,$id)
     {
-    	$venta=Venta::findOrFail($id);
-
-        $venta->fecha_hora=$request->get('fecha_hora');
-        $venta->zona=$request->get('zona');
-        $venta->idpersona=$request->get('cliente');
-        $venta->monto=$request->get('monto');
-        $venta->plan=$request->get('plan');
-        $venta->fecha_cancela=$request->get('fecha_cancela');
-        $venta->concepto=$request->get('concepto');
-        $venta->empleado=$request->get('empleado');      
+    	$venta                = Venta::findOrFail($id);
+        $venta->fecha_hora    = $request->get('fecha_hora');
+        $venta->zona          = $request->get('zona');
+        $venta->idpersona     = $request->get('cliente');
+        $venta->monto         = $request->get('monto');
+        $venta->plan          = $request->get('plan');
+        $venta->fecha_cancela = $request->get('fecha_cancela');
+        $venta->concepto      = $request->get('concepto');
+        $venta->empleado      = $request->get('empleado');      
         $venta->update();
         return Redirect::to('venta/entrega');
-    
     }
   
     public function destroy($id)
     {
     //cambiar los tipos de estados
-        $venta=Venta::findOrFail($id);
-        $venta->estado='Cancelado';
+        $venta         = Venta::findOrFail($id);
+        $venta->estado = 'Cancelado';
         $venta->update();
         return Redirect::to('venta/entrega');
     }
-    public function listar_entrega(){
-        return view('venta.entrega.index');
-
-    }
-    public function data_entrega(){
-        $venta=Venta::join('persona', 'venta.idpersona','=','persona.idpersona')
-              ->select('venta.idventa','venta.fecha_hora','venta.zona','venta.idpersona','persona.nombre_apellido','venta.monto','venta.plan','venta.fecha_cancela','venta.concepto','venta.empleado','venta.estado')
-              ->where('venta.estado','!=','Cancelado');
-        return Datatables::of($venta)
-             ->editColumn('fecha_hora', function($venta){
-                 return $venta->fecha_hora ? with(new Carbon($venta->fecha_hora))->format('m/d/Y') : '';
-             })
-             ->editColumn('fecha_cancela', function($venta){
-                return $venta->fecha_cancela ? with(new Carbon($venta->fecha_cancela))->format('m/d/Y') : '';
-            })
-        ->make(true);
-    }
+    
     public function reporte(){
          //Obtenemos los registros
          $registros=DB::table('venta as v')
@@ -143,13 +140,12 @@ class VentaController extends Controller
 
          $pdf::cell(20,8,utf8_decode("Inicio"),1,"","L",true);
          $pdf::cell(10,8,utf8_decode("Zona"),1,"","L",true);
-         $pdf::cell(35,8,utf8_decode("Cliente"),1,"","L",true);
+         $pdf::cell(55,8,utf8_decode("Cliente"),1,"","L",true);
          $pdf::cell(20,8,utf8_decode("Monto"),1,"","L",true);
-         $pdf::cell(15,8,utf8_decode("Plan"),1,"","L",true);
+         $pdf::cell(10,8,utf8_decode("Plan"),1,"","L",true);
          $pdf::cell(20,8,utf8_decode("Vence"),1,"","L",true);
          $pdf::cell(20,8,utf8_decode("Concepto"),1,"","L",true);
          $pdf::cell(15,8,utf8_decode("Entrega"),1,"","L",true);
-         $pdf::cell(20,8,utf8_decode("Estado"),1,"","L",true);
          
          $pdf::Ln();
          $pdf::SetTextColor(0,0,0);  // Establece el color del texto 
@@ -161,17 +157,16 @@ class VentaController extends Controller
          {
          	$pdf::cell(20,6,substr($reg->fecha_hora,0,10),1,"","L",true);
             $pdf::cell(10,6,utf8_decode($reg->zona),1,"","L",true);
-            $pdf::cell(35,6,utf8_decode($reg->nombre_apellido),1,"","L",true);
+            $pdf::cell(55,6,utf8_decode($reg->nombre_apellido),1,"","L",true);
             $pdf::cell(20,6,utf8_decode($reg->monto),1,"","L",true);
-            $pdf::cell(15,6,utf8_decode($reg->plan),1,"","L",true);
+            $pdf::cell(10,6,utf8_decode($reg->plan),1,"","L",true);
             $pdf::cell(20,6,substr($reg->fecha_cancela,0,10),1,"","L",true);
             $pdf::cell(20,6,utf8_decode($reg->concepto),1,"","L",true);
             $pdf::cell(15,6,utf8_decode($reg->empleado),1,"","L",true);
-            $pdf::cell(20,6,utf8_decode($reg->estado),1,"","L",true);
-            $total=$total+$reg->monto;
+            $total = $total+$reg->monto;
             $pdf::Ln(); 
          }
-         $pdf::cell(175,8,utf8_decode("Total Entregas= ".$total),1,"","C",true);
+         $pdf::cell(170,8,utf8_decode("Total Entregas = ".$total),1,"","C",true);
          $pdf::Output();
          exit;
     }
@@ -203,13 +198,12 @@ class VentaController extends Controller
 
          $pdf::cell(20,8,utf8_decode("Inicio"),1,"","L",true);
          $pdf::cell(10,8,utf8_decode("Zona"),1,"","L",true);
-         $pdf::cell(35,8,utf8_decode("Cliente"),1,"","L",true);
+         $pdf::cell(55,8,utf8_decode("Cliente"),1,"","L",true);
          $pdf::cell(20,8,utf8_decode("Monto"),1,"","L",true);
-         $pdf::cell(15,8,utf8_decode("Plan"),1,"","L",true);
+         $pdf::cell(10,8,utf8_decode("Plan"),1,"","L",true);
          $pdf::cell(20,8,utf8_decode("Vence"),1,"","L",true);
          $pdf::cell(20,8,utf8_decode("Concepto"),1,"","L",true);
          $pdf::cell(15,8,utf8_decode("Entrega"),1,"","L",true);
-         $pdf::cell(20,8,utf8_decode("Estado"),1,"","L",true);
          
          $pdf::Ln();
          $pdf::SetTextColor(0,0,0);  // Establece el color del texto 
@@ -221,17 +215,16 @@ class VentaController extends Controller
          {
             $pdf::cell(20,6,substr($reg->fecha_hora,0,10),1,"","L",true);
             $pdf::cell(10,6,utf8_decode($reg->zona),1,"","L",true);
-            $pdf::cell(35,6,utf8_decode($reg->nombre_apellido),1,"","L",true);
+            $pdf::cell(55,6,utf8_decode($reg->nombre_apellido),1,"","L",true);
             $pdf::cell(20,6,utf8_decode($reg->monto),1,"","L",true);
-            $pdf::cell(15,6,utf8_decode($reg->plan),1,"","L",true);
+            $pdf::cell(10,6,utf8_decode($reg->plan),1,"","L",true);
             $pdf::cell(20,6,substr($reg->fecha_cancela,0,10),1,"","L",true);
             $pdf::cell(20,6,utf8_decode($reg->concepto),1,"","L",true);
             $pdf::cell(15,6,utf8_decode($reg->empleado),1,"","L",true);
-            $pdf::cell(20,6,utf8_decode($reg->estado),1,"","L",true);
-            $total=$total+$reg->monto;
+            $total = $total+$reg->monto;
             $pdf::Ln(); 
          }
-         $pdf::cell(175,8,utf8_decode("Entregas= ".$total),1,"","C",true);
+         $pdf::cell(175,8,utf8_decode("Total Entregas = ".$total),1,"","C",true);
          $pdf::Output();
          exit;
     }
