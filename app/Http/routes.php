@@ -62,6 +62,7 @@ Route::get('eliminar_cliente/{id}', 'ClienteController@destroy');
 Route::get('editar_entrega/{id}', 'VentaController@edit');
 Route::get('eliminar_entrega/{id}', 'VentaController@destroy');
 Route::get('activar_entrega/{id}', 'ActivoController@create');
+Route::get('reporte_entrega/{id}', 'VentaController@reporte');
 
 //datatables
 Route::resource('listado_clientes','ClienteController@listar_cliente');

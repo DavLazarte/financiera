@@ -118,11 +118,12 @@ class VentaController extends Controller
         return Redirect::to('venta/entrega');
     }
     
-    public function reporte(){
+    public function reporte($id){
          //Obtenemos los registros
          $registros=DB::table('venta as v')
             ->join('persona as p','v.idpersona','=','p.idpersona')
             ->select('v.idventa','v.fecha_hora','v.zona','v.idpersona','p.nombre_apellido','v.monto','v.plan','v.fecha_cancela','v.concepto','v.empleado','v.estado')
+            ->where('v.idventa','=',$id)
             ->orderBy('idventa','desc')
             ->get();
 
