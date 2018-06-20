@@ -14,7 +14,6 @@
     <!--Datatables-->
     <link href="{{asset('/plugins/datatables/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('/plugins/datatables/dataTables.bootstrap.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{asset('/plugins/datatables/buttons.dataTables.min.css')}}" rel="stylesheet" type="text/css"/>
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('css/AdminLTE.min.css')}}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -199,12 +198,12 @@
         <div class="pull-right hidden-xs">
           <b>Version</b> 0.1.1
         </div>
-        <strong>Copyright &copy; 2018 CFC</a>.</strong> 
+        <strong>Copyright &copy; {{ Date('Y') }} CFC</a>.</strong> 
       </footer>
 
       
-    <!-- jQuery 3.2.1 -->
-    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+      <!-- jQuery 3.2.1 -->
+      <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
     @stack('scripts')
     <!-- Bootstrap 3.3.5 -->
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
@@ -214,13 +213,5 @@
     <!--datables-->
     <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
-    <script src="{{asset('plugins/datatables/dataTables.button.min.js')}}"></script>
-    <script src="{{asset('plugins/datatables/buttons.flash.min.js')}}"></script>
-    <script src="{{asset('plugins/datatables/jszip.min.js')}}"></script>
-    <script src="{{asset('plugins/datatables/pdfmake.min.js')}}"></script>
-    <script src="{{asset('plugins/datatables/vfs_fonts.js')}}"></script>
-    <script src="{{asset('plugins/datatables/buttons.html5.min.js')}}"></script>
-    <script src="{{asset('plugins/datatables/buttons.print.min.js')}}"></script>
-    
   </body>
 </html>

@@ -62,7 +62,7 @@ class ActivoController extends Controller
         $activo->vencimiento=$request->get('vencimiento');
         $activo->estado='Activo';       
         $activo->save();
-        return Redirect::to('venta/entrega');
+        return Redirect::to('listado_entrega');
 
     }
     public function edit($id)

@@ -42,9 +42,11 @@ class ClienteController extends Controller
             Persona::create($request->all());
             return response()->json([
                 "mensaje" => "creado"
-            ]);
-        }
-       /* codigo sin ajax $persona=new Persona;
+                ]);
+            }
+        /* 
+        codigo sin ajax 
+        $persona=new Persona;
         $persona->nombre_apellido=$request->get('nombre_apellido');
         $persona->dni=$request->get('dni');
         $persona->domicilio=$request->get('domicilio');
@@ -52,7 +54,8 @@ class ClienteController extends Controller
         $persona->tipo='Cliente';
         $persona->estado='Activo';       
         $persona->save();
-        return Redirect::to('persona/cliente');*/
+        return Redirect::to('persona/cliente');
+        */
     }
     public function edit($id)
     {

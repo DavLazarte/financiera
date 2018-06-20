@@ -1,9 +1,9 @@
 @extends ('layouts.admin')
 @section ('contenido')
-	<div class="row">
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-			<h3>Cargar Nueva Entrega <a href="" data-target="#modal-cliente" data-toggle="modal"><button class="btn btn-success">Agregar Cliente</button></a> </h3>
-            @include('persona.cliente.create')
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <h3>Cargar Nueva Entrega </h3>
+            
 			@if (count($errors)>0)
 			<div class="alert alert-danger">
 				<ul>
@@ -13,14 +13,14 @@
 				</ul>
 			</div>
 			@endif
-		</div>
 	</div>
-    <div id="msj-success" class="alert alert-success" role="alert" style="display:none">
-        <button class="close" data-dismiss="alert"><span>&times;</span></button>
-            Entrega Cargada Correctamente
-    </div>
-    <div class="row">
-    <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
+</div>
+<div id="msj-success" class="alert alert-success" role="alert" style="display:none">
+    <button class="close" data-dismiss="alert"><span>&times;</span></button>
+    Entrega Cargada Correctamente
+</div>
+<div class="row">
+ <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
     <div class="col-lg-9 col-sm-9 col-md-9 col-xs-12">
         <div class="form-group">
             <label for="fecha_hora">Inicio</label>
@@ -40,7 +40,7 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="cliente">Cliente</label>
+            <label for="cliente">Cliente </label>
             <select name="cliente" id="cliente" class="form-control selectpicker" data-live-search="true">
                 @foreach($clientes as $cliente)
                   <option value="{{$cliente->idpersona}}">{{$cliente->nombre_apellido}}</option>
@@ -91,21 +91,17 @@
             </select>
         </div>
     </div>
-    <input type="hidden" name="estado" value="PENDIENTE" id="estado">
-    	<div class="col-lg-7 col-sm-7 col-md-7 col-xs-12">
-    		<div class="form-group">
-            	<button class="btn btn-primary" type="submit" id="guardar">Guardar</button>
-            	<button class="btn btn-danger" type="reset">Cancelar</button>
-            </div>
-    	</div>
-    </div>   
-	
+ <input type="hidden" name="estado" value="PENDIENTE" id="estado">
+    <div class="col-lg-7 col-sm-7 col-md-7 col-xs-12">
+    	<div class="form-group">
+          <button class="btn btn-primary" type="submit" id="guardar">Guardar</button>
+          <button class="btn btn-danger" type="reset">Cancelar</button>
+        </div>
+    </div>
+</div>	
 @push ('scripts')
 <script>
-$('#liVentas').addClass("treeview active");
-$('#liClientes').addClass("active");
-</script>
-<script>
+$(document).ready(function(){
     $("#guardar").click(function(){
     var zona         = $("#zona").val();
     var cliente      = $("#cliente").val();
@@ -143,6 +139,7 @@ $('#liClientes').addClass("active");
             $("#msj-error").fadeIn();
         }
     });
+  });
 });
 </script>
 @endpush

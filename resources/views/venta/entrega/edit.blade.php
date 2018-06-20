@@ -88,7 +88,11 @@
                 <label for="cliente">Cliente</label>
                 <select name="cliente" id="cliente" class="form-control selectpicker" data-live-search="true">
                     @foreach($clientes as $cliente)
-                     <option value="{{$cliente->idpersona}}">{{$cliente->nombre_apellido}}</option>
+                    @if ($cliente->idpersona === $venta->idpersona)
+                    <option value="{{$cliente->idpersona}}" selected>{{$cliente->nombre_apellido}}</option>
+                    @else 
+                    <option value="{{$cliente->idpersona}}">{{$cliente->nombre_apellido}}</option>
+                    @endif
                     @endforeach
                 </select>
             </div>

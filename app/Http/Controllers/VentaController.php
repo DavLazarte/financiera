@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use ConfiSis\Http\Requests\VentaFormRequest;
 use ConfiSis\Venta;
+use ConfiSis\Persona;
 use DB;
 use Datatables;
 
@@ -85,8 +86,8 @@ class VentaController extends Controller
         $venta->concepto      = $request->get('concepto');
         $venta->empleado      = $request->get('empleado');
         $venta->estado        = 'Pendiente';       
-        $venta->save();
-        return Redirect::to('venta/entrega');*/
+        return Redirect::to('listado_entrega');
+        $venta->save();*/
     }
     public function edit($id)
     {
@@ -106,7 +107,9 @@ class VentaController extends Controller
         $venta->concepto      = $request->get('concepto');
         $venta->empleado      = $request->get('empleado');      
         $venta->update();
-        return Redirect::to('venta/entrega');
+        return redirect('listado_entrega');
+        //back()->with('info', 'Entrega cargada correctamente');
+        //Redirect::to('venta/entrega');
     }
   
     public function destroy($id)
@@ -115,7 +118,7 @@ class VentaController extends Controller
         $venta         = Venta::findOrFail($id);
         $venta->estado = 'Cancelado';
         $venta->update();
-        return Redirect::to('venta/entrega');
+        return redirect('listado_entrega')->with('status','Entrega Eliminada Correctamente');
     }
     
     public function reporte($id){
@@ -171,17 +174,11 @@ class VentaController extends Controller
          $pdf::Output();
          exit;
     }
-    public function report(Request $request,$searchText){
+    public function report(){
          //Obtenemos los registros
          $registros=DB::table('venta as v')
             ->join('persona as p','v.idpersona','=','p.idpersona')
             ->select('v.idventa','v.fecha_hora','v.zona','v.idpersona','p.nombre_apellido','v.monto','v.plan','v.fecha_cancela','v.concepto','v.empleado','v.estado')
-            ->where('nombre_apellido','LIKE','%'.$searchText.'%')
-            ->orwhere('v.estado','LIKE','%'.$searchText.'%')
-            ->orwhere('v.zona','LIKE','%'.$searchText.'%')
-            ->orwhere('v.fecha_hora','LIKE','%'.$searchText.'%')
-            ->orwhere('v.fecha_cancela','LIKE','%'.$searchText.'%')
-            ->orwhere('idventa','LIKE','%'.$searchText.'%')
             ->orderBy('idventa','desc')
             ->get();
 
