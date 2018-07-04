@@ -140,7 +140,16 @@
                 <li><a href="{{url('administracion/caja')}}"><i class="fa fa-circle-o"></i> Caja</a></li>
               </ul>
             </li>
-          @endif      
+          @endif
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-file-text-o"></i> <span>Movimientos</span>
+              <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="{{url('rep_entrega')}}"><i class="fa fa-circle-o"></i>Entregas</a></li>
+            </ul>
+          </li>       
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-tasks"></i> <span>Herramientas</span>

@@ -62,7 +62,7 @@ class ActivoController extends Controller
         $activo->vencimiento=$request->get('vencimiento');
         $activo->estado='Activo';       
         $activo->save();
-        return Redirect::to('listado_entrega');
+        return Redirect::to('listado_entrega')->with('status', 'Credito Activado');
 
     }
     public function edit($id)

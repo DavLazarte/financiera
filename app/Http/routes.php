@@ -36,7 +36,7 @@ Route::get('/home', 'HomeController@index');
 //Reportes
 Route::get('reporteclientes', 'ClienteController@reporte');
 Route::get('reporteempleados', 'EmpleadoController@reporte');
-Route::get('reporteentregas', 'VentaController@report');
+Route::get('reporteentregas/{zona},{fecha}', 'VentaController@report');
 Route::get('reportepagos/{searchText}', 'CobranzaController@report');
 Route::get('reportepagos', 'CobranzaController@reporte');
 Route::get('reporteref/{searchText}', 'RefinanciacionController@report');
@@ -62,6 +62,7 @@ Route::get('editar_entrega/{id}', 'VentaController@edit');
 Route::get('eliminar_entrega/{id}', 'VentaController@destroy');
 Route::get('activar_entrega/{id}', 'ActivoController@create');
 Route::get('reporte_entrega/{id}', 'VentaController@reporte');
+Route::get('rep_entrega','VentaController@vistaentrega');
 
 //datatables
 Route::resource('listado_clientes','ClienteController@listar_cliente');

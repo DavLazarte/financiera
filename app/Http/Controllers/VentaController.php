@@ -43,25 +43,22 @@ class VentaController extends Controller
             })
             ->make(true);
     }
-    /*public function index(Request $request)
+    public function vistaentrega(Request $request)
     {
         if ($request)
         {
-            $query=trim($request->get('searchText'));
+            $zona=trim($request->get('zona'));
+            $fecha=trim($request->get('fecha'));
             $ventas=DB::table('venta as v')
             ->join('persona as p','v.idpersona','=','p.idpersona')
             ->select('v.idventa','v.fecha_hora','v.zona','v.idpersona','p.nombre_apellido','v.monto','v.plan','v.fecha_cancela','v.concepto','v.empleado','v.estado')
-            ->where('nombre_apellido','LIKE','%'.$query.'%')
-            ->orwhere('v.estado','LIKE','%'.$query.'%')
-            ->orwhere('v.zona','LIKE','%'.$query.'%')
-            ->orwhere('v.fecha_hora','LIKE','%'.$query.'%')
-            ->orwhere('v.fecha_cancela','LIKE','%'.$query.'%')
-            ->orwhere('idventa','LIKE','%'.$query.'%')
+            ->where('v.zona','=',$zona)
+            ->where('v.fecha_hora','=',$fecha)
             ->orderBy('idventa','desc')
-            ->simplePaginate(5);
-            return view('venta.entrega.index',["ventas"=>$ventas,"searchText"=>$query]);
+            ->get();
+            return view('movimientos.entrega',["ventas"=>$ventas,"zona"=>$zona,"fecha"=>$fecha]);
         }
-    }*/
+    }
     public function create()
     {
     	$clientes = DB::table('persona')->where('tipo','=','Cliente')
@@ -170,15 +167,18 @@ class VentaController extends Controller
             $total = $total+$reg->monto;
             $pdf::Ln(); 
          }
-         $pdf::cell(170,8,utf8_decode("Total Entregas = ".$total),1,"","C",true);
+         $pdf::cell(160,8,utf8_decode("TOTAL ENTREGAS = ".$total),1,"","C",true);
          $pdf::Output();
          exit;
     }
-    public function report(){
+    public function report($zona, $fecha){
          //Obtenemos los registros
+         //dd($zona, $fecha);
          $registros=DB::table('venta as v')
             ->join('persona as p','v.idpersona','=','p.idpersona')
             ->select('v.idventa','v.fecha_hora','v.zona','v.idpersona','p.nombre_apellido','v.monto','v.plan','v.fecha_cancela','v.concepto','v.empleado','v.estado')
+            ->where('v.zona','=',$zona)        
+            ->where('v.fecha_hora','=',$fecha)        
             ->orderBy('idventa','desc')
             ->get();
 
@@ -187,6 +187,9 @@ class VentaController extends Controller
          $pdf::SetTextColor(35,56,113);
          $pdf::SetFont('Arial','B',11);
          $pdf::Cell(0,10,utf8_decode("Listado de Entregas"),0,"","C");
+         $pdf::Ln();
+         $pdf::Cell(0,10,utf8_decode("ZONA: ".$zona),0,"","L");
+         $pdf::Cell(0,10,utf8_decode("FECHA: ".$fecha),0,"","R");
          $pdf::Ln();
          $pdf::Ln();
          $pdf::SetTextColor(0,0,0);  // Establece el color del texto 
@@ -222,7 +225,7 @@ class VentaController extends Controller
             $total = $total+$reg->monto;
             $pdf::Ln(); 
          }
-         $pdf::cell(175,8,utf8_decode("Total Entregas = ".$total),1,"","C",true);
+         $pdf::cell(170,8,utf8_decode("MONTO TOTAL DE ENTREGAS = ".$total),1,"","C",true);
          $pdf::Output();
          exit;
     }
