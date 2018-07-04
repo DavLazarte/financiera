@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use ConfiSis\Http\Requests\ActivoFormRequest;
 use ConfiSis\Activo;
+use ConfiSis\Venta;
 use DB;
 
 use Fpdf;
@@ -42,11 +43,12 @@ class ActivoController extends Controller
             return view('venta.activo.index',["activos"=>$activos,"searchText"=>$query]);
         }
     }
-    public function create()
+    public function create($id)
     {
-    	$clientes=DB::table('persona')->where('tipo','=','Cliente')
-    	->get();
-        return view("venta.activo.create",["clientes"=>$clientes]);
+        $venta=Venta::join('persona', 'venta.idpersona','=','persona.idpersona')
+        ->select('venta.idventa','venta.fecha_hora','venta.zona','venta.idpersona','persona.nombre_apellido','venta.monto','venta.plan','venta.fecha_cancela','venta.concepto','venta.empleado','venta.estado')
+        ->findOrFail($id);
+        return view("venta.activo.create",["venta"=>$venta]);
     }
     public function store (ActivoFormRequest $request)
     {
@@ -60,7 +62,7 @@ class ActivoController extends Controller
         $activo->vencimiento=$request->get('vencimiento');
         $activo->estado='Activo';       
         $activo->save();
-        return Redirect::to('venta/activo');
+        return Redirect::to('listado_entrega')->with('status', 'Credito Activado');
 
     }
     public function edit($id)

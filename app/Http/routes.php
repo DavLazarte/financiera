@@ -36,8 +36,7 @@ Route::get('/home', 'HomeController@index');
 //Reportes
 Route::get('reporteclientes', 'ClienteController@reporte');
 Route::get('reporteempleados', 'EmpleadoController@reporte');
-Route::get('reporteentregas/{searchText}', 'VentaController@report');
-Route::get('reporteentregas', 'VentaController@reporte');
+Route::get('reporteentregas/{zona},{fecha}', 'VentaController@report');
 Route::get('reportepagos/{searchText}', 'CobranzaController@report');
 Route::get('reportepagos', 'CobranzaController@reporte');
 Route::get('reporteref/{searchText}', 'RefinanciacionController@report');
@@ -59,7 +58,14 @@ Route::get('reporteliquidaciones', 'LiquidacionController@report');
 Route::get('reporteliquidacion/{id}', 'LiquidacionController@reportec');
 Route::get('editar_cliente/{id}', 'ClienteController@edit');
 Route::get('eliminar_cliente/{id}', 'ClienteController@destroy');
+Route::get('editar_entrega/{id}', 'VentaController@edit');
+Route::get('eliminar_entrega/{id}', 'VentaController@destroy');
+Route::get('activar_entrega/{id}', 'ActivoController@create');
+Route::get('reporte_entrega/{id}', 'VentaController@reporte');
+Route::get('rep_entrega','VentaController@vistaentrega');
 
 //datatables
 Route::resource('listado_clientes','ClienteController@listar_cliente');
 Route::resource('listado_clientes_data','ClienteController@data_cliente');
+Route::resource('listado_entrega','VentaController@listar_entrega');
+Route::resource('listado_entregas_data','VentaController@data_entrega');

@@ -23,7 +23,7 @@
     <link rel="shortcut icon" href="{{asset('img/favicon.ico')}}">
 
   </head>
-  <body class="hold-transition skin-blue sidebar-mini">
+  <body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
     <div class="wrapper">
 
       <header class="main-header">
@@ -94,7 +94,7 @@
             </li>
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-archive"></i>
+                <i class="fa fa-user"></i>
                 <span>Personas</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
@@ -111,7 +111,7 @@
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="{{url('venta/entrega')}}"><i class="fa fa-circle-o"></i>Entregas</a></li>
+                <li><a href="{{url('listado_entrega')}}"><i class="fa fa-circle-o"></i>Entregas</a></li>
                 <li><a href="{{url('venta/activo')}}"><i class="fa fa-circle-o"></i>Activos</a></li>
                  <li><a href="{{url('venta/refinanciacion')}}"><i class="fa fa-circle-o"></i>Refinanciaciones</a></li>
               </ul>
@@ -140,7 +140,16 @@
                 <li><a href="{{url('administracion/caja')}}"><i class="fa fa-circle-o"></i> Caja</a></li>
               </ul>
             </li>
-          @endif      
+          @endif
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-file-text-o"></i> <span>Movimientos</span>
+              <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="{{url('rep_entrega')}}"><i class="fa fa-circle-o"></i>Entregas</a></li>
+            </ul>
+          </li>       
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-tasks"></i> <span>Herramientas</span>
@@ -198,12 +207,12 @@
         <div class="pull-right hidden-xs">
           <b>Version</b> 0.1.1
         </div>
-        <strong>Copyright &copy; 2018 CFC</a>.</strong> 
+        <strong>Copyright &copy; {{ Date('Y') }} CFC</a>.</strong> 
       </footer>
 
       
-    <!-- jQuery 3.2.1 -->
-    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+      <!-- jQuery 3.2.1 -->
+      <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
     @stack('scripts')
     <!-- Bootstrap 3.3.5 -->
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
