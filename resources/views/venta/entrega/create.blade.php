@@ -15,12 +15,20 @@
 			@endif
 	</div>
 </div>
-<div id="msj-success" class="alert alert-success" role="alert" style="display:none">
+@if (session('status'))
+    <div class="alert alert-success fade in">
+        <button class="close" data-dismiss="alert"><span>&times;</span></button>
+        {{ session('status') }}
+    </div>
+@endif
+{!!Form::open(array('url'=>'venta/entrega','method'=>'POST','autocomplete'=>'off'))!!}
+{{Form::token()}}
+{{-- <div id="msj-success" class="alert alert-success" role="alert" style="display:none">
     <button class="close" data-dismiss="alert"><span>&times;</span></button>
     Entrega Cargada Correctamente
-</div>
+</div> --}}
 <div class="row">
- <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
+ {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token"> --}}
     <div class="col-lg-9 col-sm-9 col-md-9 col-xs-12">
         <div class="form-group">
             <label for="fecha_hora">Inicio</label>
@@ -91,7 +99,7 @@
             </select>
         </div>
     </div>
- <input type="hidden" name="estado" value="PENDIENTE" id="estado">
+     {{-- <input type="hidden" name="estado" value="PENDIENTE" id="estado"> --}}
     <div class="col-lg-7 col-sm-7 col-md-7 col-xs-12">
     	<div class="form-group">
           <button class="btn btn-primary" type="submit" id="guardar">Guardar</button>
@@ -99,7 +107,8 @@
         </div>
     </div>
 </div>	
-@push ('scripts')
+{!!Form::Close()!!}
+{{-- @push ('scripts')
 <script>
 $(document).ready(function(){
     $("#guardar").click(function(){
@@ -142,5 +151,5 @@ $(document).ready(function(){
   });
 });
 </script>
-@endpush
+@endpush --}}
 @endsection

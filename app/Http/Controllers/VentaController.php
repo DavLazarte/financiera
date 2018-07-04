@@ -35,6 +35,15 @@ class VentaController extends Controller
             ->select('venta.idventa','venta.fecha_hora','venta.zona','venta.idpersona','persona.nombre_apellido','venta.monto','venta.plan','venta.fecha_cancela','venta.concepto','venta.empleado','venta.estado')
             ->where('venta.estado','!=','Cancelado');
             return Datatables::of($venta)
+            ->addColumn('action', function($venta){
+                if ($venta->estado !=='PENDIENTE') {
+                    return '<a href="editar_entrega/'.$venta->idventa.'" <button title="Editar" class="btn btn-info btn-sm"><i class="fa fa-pencil-square-o"></i></button</a>  <a href="eliminar_entrega/'.$venta->idventa.'" <button title="Eliminar" class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a> <a href="reporte_entrega/'.$venta->idventa.'" <button title="imprimir" class="btn btn-warning btn-sm" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></button></a>';
+                }
+                else
+                {
+                    return '<a href="activar_entrega/'.$venta->idventa.'" <button title="Activar" class="btn btn-success btn-sm"><i class="fa fa-power-off" aria-hidden="true"></i></button></a> <a href="editar_entrega/'.$venta->idventa.'" <button title="Editar" class="btn btn-info btn-sm"><i class="fa fa-pencil-square-o"></i></button</a> <a href="eliminar_entrega/'.$venta->idventa.'" <button title="Eliminar" class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a> <a href="reporte_entrega/'.$venta->idventa.'" <button title="imprimir" class="btn btn-warning btn-sm" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></button></a>';
+                }
+            })
             ->editColumn('fecha_hora', function($venta) {
             return $venta->fecha_hora ? with(new Carbon($venta->fecha_hora))->format('m/d/Y') : '';
             })
@@ -67,13 +76,14 @@ class VentaController extends Controller
     }
     public function store (VentaFormRequest $request)
     {
-        if($request->ajax()){
-            Venta::create($request->all());
-            return response()->json([
-                "mensaje" => "creado"
-            ]);
-        }
-        /* store sin ajax $venta=new Venta;
+        // if($request->ajax()){
+        //     Venta::create($request->all());
+        //     return response()->json([
+        //         "mensaje" => "creado"
+        //     ]);
+        // }
+        //store sin ajax 
+        $venta=new Venta;
         $venta->fecha_hora    = $request->get('fecha_hora');
         $venta->zona          = $request->get('zona');
         $venta->idpersona     = $request->get('cliente');
@@ -82,9 +92,9 @@ class VentaController extends Controller
         $venta->fecha_cancela = $request->get('fecha_cancela');
         $venta->concepto      = $request->get('concepto');
         $venta->empleado      = $request->get('empleado');
-        $venta->estado        = 'Pendiente';       
-        return Redirect::to('listado_entrega');
-        $venta->save();*/
+        $venta->estado        = 'PENDIENTE';       
+        $venta->save();
+        return back()->with('status','cargado');
     }
     public function edit($id)
     {
@@ -167,7 +177,7 @@ class VentaController extends Controller
             $total = $total+$reg->monto;
             $pdf::Ln(); 
          }
-         $pdf::cell(160,8,utf8_decode("TOTAL ENTREGAS = ".$total),1,"","C",true);
+         $pdf::cell(170,8,utf8_decode("TOTAL ENTREGAS = ".$total),1,"","C",true);
          $pdf::Output();
          exit;
     }

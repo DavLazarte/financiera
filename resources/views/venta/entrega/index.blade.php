@@ -5,10 +5,10 @@
     <h3>Listado de Entregas <a href="{{url('venta/entrega/create')}}"><button class="btn btn-success" title="Agregar Entrega"><i class="fa fa-plus-square" aria-hidden="true"></i></button></a> 
 </div>
 </div>
-@if (session('status'))
+@if (session('info'))
     <div class="alert alert-success fade in">
         <button class="close" data-dismiss="alert"><span>&times;</span></button>
-        {{ session('status') }}
+        {{ session('info') }}
     </div>
 @endif
 
@@ -57,10 +57,7 @@ $(document).ready(function(){
             { data: 'concepto', name: 'venta.concepto' },
             { data: 'empleado', name: 'venta.empleado' },
             { data: 'estado', name:'venta.estado' },
-            { data: null, render: function ( data, type, row ) {
-                return "<a href='{{ url('editar_entrega/') }}/"+ data.idventa +"' <button title='Editar' class='btn btn-info btn-sm'><i class='fa fa-pencil-square-o'></i></button></a> <a href='{{ url('activar_entrega/') }}/"+ data.idventa +"' <button title='Activar' class='btn btn-success btn-sm'><i class='fa fa-power-off' aria-hidden='true'></i></button></a>	<a href='{{ url('eliminar_entrega/') }}/"+ data.idventa +"' <button title='Eliminar' class='btn btn-danger btn-sm'><i class='fa fa-trash-o' aria-hidden='true'></i></button></a> <a href='{{ url('reporte_entrega/') }}/"+ data.idventa +"' <button title='imprimir' class='btn btn-warning btn-sm' target='_blank'><i class='fa fa-print' aria-hidden='true'></i></button></a>" 
-                }
-            }
+            { data: 'action', name:'venta.action', orderable: false, searchable:false }
         ]
     });
   });		 
