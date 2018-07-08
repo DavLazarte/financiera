@@ -112,7 +112,7 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="{{url('listado_entrega')}}"><i class="fa fa-circle-o"></i>Entregas</a></li>
-                <li><a href="{{url('venta/activo')}}"><i class="fa fa-circle-o"></i>Activos</a></li>
+                <li><a href="{{url('listado_activo')}}"><i class="fa fa-circle-o"></i>Activos</a></li>
                  <li><a href="{{url('venta/refinanciacion')}}"><i class="fa fa-circle-o"></i>Refinanciaciones</a></li>
               </ul>
             </li>

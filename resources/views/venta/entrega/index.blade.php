@@ -1,9 +1,9 @@
 @extends ('layouts.admin')
 @section ('contenido')
 <div class="row">
-    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
     <h3>Listado de Entregas <a href="{{url('venta/entrega/create')}}"><button class="btn btn-success" title="Agregar Entrega"><i class="fa fa-plus-square" aria-hidden="true"></i></button></a> 
-</div>
+  </div>
 </div>
 @if (session('info'))
     <div class="alert alert-success fade in">
@@ -15,7 +15,7 @@
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="table-responsive">
-            <table class="table table-striped table-bordered table-condensed table-hover" id="tabla_entrega" name="tabla">
+            <table class="table table-striped table-bordered table-condensed table-hover" id="tabla_entrega">
                 <thead>
                     <th>Id</th>
                     <th>Inicio</th>

@@ -61,11 +61,17 @@ Route::get('eliminar_cliente/{id}', 'ClienteController@destroy');
 Route::get('editar_entrega/{id}', 'VentaController@edit');
 Route::get('eliminar_entrega/{id}', 'VentaController@destroy');
 Route::get('activar_entrega/{id}', 'ActivoController@create');
+Route::get('refi_activo/{id}', 'RefinanciacionController@create');
+Route::get('editar_activo/{id}', 'ActivoController@edit');
+Route::get('eliminar_activo/{id}', 'ActivoController@destroy');
 Route::get('reporte_entrega/{id}', 'VentaController@reporte');
+Route::get('reporte_activo/{id}', 'ActivoController@reporte');
 Route::get('rep_entrega','VentaController@vistaentrega');
 
 //datatables
-Route::resource('listado_clientes','ClienteController@listar_cliente');
-Route::resource('listado_clientes_data','ClienteController@data_cliente');
-Route::resource('listado_entrega','VentaController@listar_entrega');
-Route::resource('listado_entregas_data','VentaController@data_entrega');
+Route::get('listado_clientes','ClienteController@listar_cliente');
+Route::get('listado_clientes_data','ClienteController@data_cliente');
+Route::get('listado_entrega','VentaController@listar_entrega');
+Route::get('listado_entregas_data','VentaController@data_entrega');
+Route::get('listado_activo','ActivoController@listar_activo');
+Route::get('listado_activos_data','ActivoController@data_activo');

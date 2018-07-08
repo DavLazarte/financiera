@@ -1,39 +1,128 @@
-<div class="modal fade modal-slide-in-right" aria-hidden="true" role="dialog" tabindex="-1" id="modal-create-{{$act->idcredito}}">
-
-    {!!Form::open(array('url'=>'venta/refinanciacion','method'=>'POST','autocomplete'=>'off'))!!}
-    {{Form::token()}}
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" 
-                aria-label="Close">
-                     <span aria-hidden="true">×</span>
-                </button>
-                <h4 class="modal-title">Refinanciar Credito</h4>
+@extends ('layouts.admin')
+@section ('contenido')
+    <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <h3>Refinanciar Credito</h3>
+                    @if (count($errors)>0)
+                <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{$error}}</li>
+                    @endforeach
+                </ul>
             </div>
-            <div class="modal-body">
-                <p>Confirme si desea refinanciar el credito n° </p>
-                <input type="text" name="credito" id="credito" value="{{$act->idcredito}}">
-                <input type="hidden" name="cliente" id="cliente" value="{{$act->cliente}} ">
-                <input type="hidden" name="saldo" id="saldo" value="{{$act->saldo}}">
-                <input type="hidden" name="plan" id="plan" value="0">
-
-                <input type="hidden" name="vencimiento" id="vencimiento" value="0">
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary">Confirmar</button>
-            </div>
+                @endif
         </div>
     </div>
+    {!!Form::open(array('url'=>'venta/refinanciacion','method'=>'POST','autocomplete'=>'off'))!!}
+    {{Form::token()}}
+    <div class="row">
+        <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+            <div class="form-group">
+                <label>Credito N°:</label>
+                <input type="text" name="credito" id="idcredito" readonly value="{{$activo->idcredito}}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="cliente">Cliente</label>
+                <input type="text" name="cliente" id="cliente" value="{{$activo->cliente}}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="saldo">Saldo</label>
+                <input type="text" name="saldo" id="saldo" value="{{$activo->saldo}}" class="form-control" >
+            </div>
+            <div class="form-group">
+               <label for="plan">Plan</label>
+               <select name="plan" id="plan" class="form-control">
+                   <option value="o">Plan</option>
+                   <option value="1">26 dias</option>
+                   <option value="2">35 dias</option>
+                   <option value="3">4 semanas</option>
+                   <option value="4">5 semanas</option>
+                   <option value="5">6 semanas</option>
+                   <option value="6">Especial</option>
+               </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="vencimiento">Cancelación</label>
+                <input type="date" name="vencimiento" value="{{$activo->vencimiento}}" class="form-control">
+            </div>
+        </div>
+        <div class="col-lg-9 col-sm-9 col-md-9 col-xs-12">
+            <div class="form-group" id="botones">
+                <button class="btn btn-primary" type="submit">Guardar</button>
+                <button class="btn btn-danger" type="reset">Cancelar</button>
+            </div>
+        <button type="button"  id="actualizar" class="btn btn-default" >Actualizar saldo</button>
+        </div>
+</div>  
 {!!Form::Close()!!}
  @push ('scripts')
-<script>
-
-$('#liVentas').addClass("treeview active");
-$('#liVentass').addClass("active");
-  
+ <script>
+    $(document).ready(function(){
+        $('#actualizar').click(function(){
+          calculo();
+        });
+    });
+        
+    $("#botones").hide();
+    var calculo = function()
+        {
+        
+                    var plan = parseInt(document.getElementById("plan").value);
+                    
+                    switch(plan)
+                    {
+                        case 1:
+                            var saldo = parseInt(document.getElementById("saldo").value);
+                            var interes = 30;
+                            var calculo = saldo * interes/100;
+                            var total = saldo + calculo;
+                            $("#saldo").val(total.toFixed(2));
+                            break;
+                        case 2:
+                            var saldo = parseInt(document.getElementById("saldo").value);
+                            var interes = 40;
+                            var calculo = saldo * interes/100;
+                            var total = saldo + calculo;
+                            $("#saldo").val(total.toFixed(2));
+                            break;
+                        case 3:
+                            var saldo = parseInt(document.getElementById("saldo").value);
+                            var interes = 24;
+                            var calculo = saldo * interes/100;
+                            var total = saldo + calculo;
+                            $("#saldo").val(total.toFixed(2));
+                            break;
+                        case 4:
+                            var saldo = parseInt(document.getElementById("saldo").value);
+                            var interes = 30;
+                            var calculo = saldo * interes/100;
+                            var total = saldo + calculo;
+                            $("#saldo").val(total.toFixed(2));
+                            break;
+                        
+                        case 5:
+                            var saldo = parseInt(document.getElementById("saldo").value);
+                            var interes = 36;
+                            var calculo = saldo * interes/100;
+                            var total = saldo + calculo;
+                            $("#saldo").val(total.toFixed(2));
+                            break;
+                        case 6:
+                            alert('Ingrese el saldo');
+                            $("#botones").show();
+                            $("#actualizar").hide();
+                            break;
+                    }
+                    $("#botones").show();
+                    $("#actualizar").hide();
+        }
+        
+        
+ $('#lirefinanciacions').addClass("treeview active");
+ $('#lirefinanciaciones').addClass("active");
+          
 </script>
 @endpush    
-</div>
+@endsection

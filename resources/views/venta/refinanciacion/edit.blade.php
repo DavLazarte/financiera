@@ -50,7 +50,7 @@
             </div>
         <button type="button"  id="actualizar" class="btn btn-default" >Actualizar saldo</button>
         </div>
-    </div>  
+</div>  
 {{Form::Close()}} 
 @push ('scripts')
 <script>

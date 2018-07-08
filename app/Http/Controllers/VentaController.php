@@ -37,11 +37,11 @@ class VentaController extends Controller
             return Datatables::of($venta)
             ->addColumn('action', function($venta){
                 if ($venta->estado !=='PENDIENTE') {
-                    return '<a href="editar_entrega/'.$venta->idventa.'" <button title="Editar" class="btn btn-info btn-sm"><i class="fa fa-pencil-square-o"></i></button</a>  <a href="eliminar_entrega/'.$venta->idventa.'" <button title="Eliminar" class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a> <a href="reporte_entrega/'.$venta->idventa.'" <button title="imprimir" class="btn btn-warning btn-sm" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></button></a>';
+                    return '<a href="editar_entrega/'.$venta->idventa.'" <button title="Editar" class="btn btn-info btn-sm"><i class="fa fa-pencil-square-o"></i></button></a>  <a href="eliminar_entrega/'.$venta->idventa.'" <button title="Eliminar" class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a> <a href="reporte_entrega/'.$venta->idventa.'" <button title="imprimir" class="btn btn-warning btn-sm" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></button></a>';
                 }
                 else
                 {
-                    return '<a href="activar_entrega/'.$venta->idventa.'" <button title="Activar" class="btn btn-success btn-sm"><i class="fa fa-power-off" aria-hidden="true"></i></button></a> <a href="editar_entrega/'.$venta->idventa.'" <button title="Editar" class="btn btn-info btn-sm"><i class="fa fa-pencil-square-o"></i></button</a> <a href="eliminar_entrega/'.$venta->idventa.'" <button title="Eliminar" class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a> <a href="reporte_entrega/'.$venta->idventa.'" <button title="imprimir" class="btn btn-warning btn-sm" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></button></a>';
+                    return '<a href="activar_entrega/'.$venta->idventa.'" <button title="Activar" class="btn btn-success btn-sm"><i class="fa fa-power-off" aria-hidden="true"></i></button></a> <a href="editar_entrega/'.$venta->idventa.'" <button title="Editar" class="btn btn-info btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a> <a href="eliminar_entrega/'.$venta->idventa.'" <button title="Eliminar" class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a> <a href="reporte_entrega/'.$venta->idventa.'" <button title="imprimir" class="btn btn-warning btn-sm" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></button></a>';
                 }
             })
             ->editColumn('fecha_hora', function($venta) {

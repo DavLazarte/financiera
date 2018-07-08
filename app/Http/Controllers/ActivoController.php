@@ -12,7 +12,7 @@ use ConfiSis\Http\Requests\ActivoFormRequest;
 use ConfiSis\Activo;
 use ConfiSis\Venta;
 use DB;
-
+use Datatables;
 use Fpdf;
 
 use Carbon\Carbon;
@@ -25,24 +25,56 @@ class ActivoController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index(Request $request)
-    {
-        if ($request)
-        {
-            $query=trim($request->get('searchText'));
-            $activos=DB::table('activo as a')
-            ->join('venta as v','a.idcredito','=','v.idventa')
-            ->select('a.idcredito','a.zona','a.cliente','a.saldo','a.proyeccion','a.vencimiento','a.estado')
-            ->where('cliente','LIKE','%'.$query.'%')
-            ->orwhere('idcredito','LIKE','%'.$query.'%')
-            ->orwhere('a.zona','LIKE','%'.$query.'%')
-            ->orwhere('a.estado','LIKE','%'.$query.'%')
-            ->orwhere('a.vencimiento','LIKE','%'.$query.'%')
-            ->orderBy('idcredito','desc')
-            ->paginate(7);
-            return view('venta.activo.index',["activos"=>$activos,"searchText"=>$query]);
-        }
+    //index datatable
+    public function listar_activo(){
+        return view('venta.activo.index');
     }
+    public function data_activo(){
+        
+        $activo = Activo::join('venta', 'activo.idcredito','=','venta.idventa')
+        ->select('activo.idcredito','activo.zona','activo.cliente','activo.saldo','activo.proyeccion','activo.vencimiento','activo.estado');
+        return Datatables::of($activo)
+        
+        ->addColumn('action', function($activo){
+            return '<a href="editar_activo/'.$activo->idcredito.'" <button title="Editar" class="btn btn-info btn-sm"><i class="fa fa-pencil-square-o"></i></button> </a> <a href="reporte_activo/'.$activo->idcredito.'" <button title="imprimir" class="btn btn-warning btn-sm" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></button></a> <a href="refi_activo/'.$activo->idcredito.'" <button title="Refinanciar" class="btn btn-primary btn-sm"><i class="fa fa-calendar-times-o"></i></button</a> '; 
+        })
+        ->editColumn('vencimiento', function($activo) {
+            return $activo->vencimiento ? with(new Carbon($activo->vencimiento))->format('m/d/Y') : '';
+        })
+        ->setRowClass(function ($activo){
+            $vencimiento = new Carbon($activo->vencimiento);
+            $hoy = Carbon::now();
+            // dd($hoy, $vencimiento);
+            if ($activo->saldo == 0)
+            {
+                return $activo->saldo == 0 ? 'alert-success':''; 
+            }
+            else
+            {
+                return ($hoy->greaterThan($vencimiento)) ? 'alert-danger' : '' ;
+            }
+            
+        })
+        ->make(true);  
+    }
+    // public function index(Request $request)
+    // {
+    //     if ($request)
+    //     {
+    //         $query=trim($request->get('searchText'));
+    //         $activos=DB::table('activo as activo')
+    //         ->join('venta as v','a.idcredito','=','v.idventa')
+    //         ->select('a.idcredito','a.zona','a.cliente','a.saldo','a.proyeccion','a.vencimiento','a.estado')
+    //         ->where('cliente','LIKE','%'.$query.'%')
+    //         ->orwhere('idcredito','LIKE','%'.$query.'%')
+    //         ->orwhere('a.zona','LIKE','%'.$query.'%')
+    //         ->orwhere('a.estado','LIKE','%'.$query.'%')
+    //         ->orwhere('a.vencimiento','LIKE','%'.$query.'%')
+    //         ->orderBy('idcredito','desc')
+    //         ->paginate(7);
+    //         return view('venta.activo.index',["activos"=>$activos,"searchText"=>$query]);
+    //     }
+    // }
     public function create($id)
     {
         $venta=Venta::join('persona', 'venta.idpersona','=','persona.idpersona')
@@ -80,7 +112,7 @@ class ActivoController extends Controller
         $activo->proyeccion=$request->get('proyeccion');
         $activo->vencimiento=$request->get('vencimiento'); 
         $activo->update();
-        return Redirect::to('venta/activo');
+        return Redirect::to('listado_activo');
     
     }
   
@@ -88,15 +120,16 @@ class ActivoController extends Controller
     {
     	//mejorar la eleccion de estados
         $activo=Activo::findOrFail($id);
-        $activo->estado=$request->get('estado');
+        $activo->estado='Eliminado';
         $activo->update();
-        return Redirect::to('venta/activo');
+        return Redirect::to('listado_activo');
     }
-    public function reporte(){
+    public function reporte($id){
          //Obtenemos los registros
          $registros=DB::table('activo as a')
             ->join('venta as v','a.idcredito','=','v.idventa')
             ->select('a.idcredito','a.zona','a.cliente','a.saldo','a.proyeccion','a.vencimiento','a.estado')
+            ->where('a.idcredito','=',$id)
             ->orderBy('idcredito','desc')
             ->get();
 

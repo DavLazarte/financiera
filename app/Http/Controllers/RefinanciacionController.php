@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use ConfiSis\Http\Requests\RefinanciacionFormRequest;
 use ConfiSis\Refinanciacion;
+use ConfiSis\Activo;
 use DB;
 
 use Fpdf;
@@ -44,11 +45,13 @@ class RefinanciacionController extends Controller
             return view('venta.refinanciacion.index',["refinanciaciones"=>$refinanciaciones,"searchText"=>$query]);
         }
     }
-    public function create()
+    public function create($id)
     {
-    	$clientes=DB::table('persona')->where('tipo','=','Cliente')
-    	->get();
-        return view("venta.refinanciacion.create",["clientes"=>$clientes]);
+    	$clientes = DB::table('persona')->where('tipo','=','Cliente')
+        ->get();
+        $activo   = Activo::findOrFail($id);
+        
+        return view("venta.refinanciacion.create",["clientes"=>$clientes,"activo"=>$activo]);
     }
     public function store (RefinanciacionFormRequest $request)
     {
