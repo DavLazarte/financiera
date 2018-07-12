@@ -45,9 +45,9 @@ class ActivoController extends Controller
             $vencimiento = new Carbon($activo->vencimiento);
             $hoy = Carbon::now();
             // dd($hoy, $vencimiento);
-            if ($activo->saldo == 0)
+            if ($activo->saldo <= 0)
             {
-                return $activo->saldo == 0 ? 'alert-success':''; 
+                return $activo->saldo <= 0 ? 'alert-success':''; 
             }
             else
             {

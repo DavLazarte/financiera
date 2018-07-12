@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use ConfiSis\Http\Requests\CobranzaFormRequest;
 use ConfiSis\Cobranza;
+use ConfiSis\Activo;
 use DB;
 
 use Fpdf;
@@ -54,21 +55,31 @@ public function __construct()
     }
     public function store (CobranzaFormRequest $request)
     {
-        /*$pago=new Cobranza;
-
+        $pago=new Cobranza;
         $pago->idventa=$request->get('idventa');
         $pago->fecha_hora=$request->get('fecha_hora');
         $pago->zona=$request->get('zona');
         $pago->monto=$request->get('monto');
         $pago->estado='Activo';       
-        $pago->save()
-        return Redirect::to('cobranza/pago');*/ 
-        if($request->ajax()){
-            Cobranza::create($request->all());
-            return response()->json([
-                "mensaje" => "creado"
-            ]);
+        $pago->save();
+        $activo=Activo::findOrFail($request->get('idventa'));
+        //dd($activo->saldo);
+        //dd($activo->saldo);
+        if ($activo->saldo == 0.00) 
+        {
+            $activo->estado='Cancelado';
+            $activo->update();
         }
+        return back()->with('status','cargado');
+    
+        // if($request->ajax()){
+        //     Cobranza::create($request->all());
+        //     return response()->json([
+        //         "mensaje" => "creado"
+        //     ]);
+            
+        // }
+        
     }
     public function edit($id)
     {

@@ -14,12 +14,15 @@
 			@endif
 		</div>
 	</div>
-    <div id="msj-success" class="alert alert-success" role="alert" style="display:none">
-    <button class="close" data-dismiss="alert"><span>&times;</span></button>
-        Pago Cargado Correctamente
+    @if (session('status'))
+    <div class="alert alert-success fade in">
+        <button class="close" data-dismiss="alert"><span>&times;</span></button>
+        {{ session('status') }}
     </div>
+@endif
+{!!Form::open(array('url'=>'cobranza/pago','method'=>'POST','autocomplete'=>'off'))!!}
+{{Form::token()}}
     <div class="row">
-    <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
         <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
             <div class="form-group">
                 <label for="idventa"> Elegir Credito</label>
@@ -69,7 +72,7 @@
                 <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
                     <div class="form-group">
                         <label for="zona">Zona</label>                              
-                        <input type="text" class="form-control"  readonly id="pzona">
+                        <input type="text" class="form-control"  readonly  name="zona" id="pzona">
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
@@ -102,7 +105,6 @@
                         <input type="text" class="form-control"  readonly id="estado">
                     </div>
                 </div>               
-            <input type="hidden" class="form-control" name="estado" value="Activo" id="estado">                
         </div>
     	<div class="col-lg-9 col-sm-9 col-md-9 col-xs-12">
     		<div class="form-group">
@@ -120,36 +122,36 @@ $('#liClientes').addClass("active");
     $("#datoscredito").hide();
     $("#pcredito").change(mostrarCredito);
 
-    $("#guardar").click(function(){
-    var credito    = $("#id").val();
-    var fecha      = $("#fecha").val();
-    var zona       = $("#pzona").val();
-    var monto      = $("#monto").val();
-    var estado     = $("#estado").val();
-    var route      = "{{url('cobranza/pago')}}";
-    var token      = $("#token").val();
+//     $("#guardar").click(function(){
+//     var credito    = $("#id").val();
+//     var fecha      = $("#fecha").val();
+//     var zona       = $("#pzona").val();
+//     var monto      = $("#monto").val();
+//     var estado     = $("#estado").val();
+//     var route      = "{{url('cobranza/pago')}}";
+//     var token      = $("#token").val();
 
-    $.ajax({
-        url: route,
-        headers: {'X-CSRF-TOKEN': token},
-        type: 'POST',
-        dataType: 'json',
-        data:{idventa: credito,
-              fecha_hora: fecha,
-              zona: zona,
-              monto: monto,
-              estado: estado,
-            },
+//     $.ajax({
+//         url: route,
+//         headers: {'X-CSRF-TOKEN': token},
+//         type: 'POST',
+//         dataType: 'json',
+//         data:{idventa: credito,
+//               fecha_hora: fecha,
+//               zona: zona,
+//               monto: monto,
+//               estado: estado,
+//             },
 
-        success:function(){
-            $("#msj-success").fadeIn();
-        },
-        error:function(msj){
-            $("#msj").html(msj.responseJSON.idventa);
-            $("#msj-error").fadeIn();
-        }
-    });
-});
+//         success:function(){
+//             $("#msj-success").fadeIn();
+//         },
+//         error:function(msj){
+//             $("#msj").html(msj.responseJSON.idventa);
+//             $("#msj-error").fadeIn();
+//         }
+//     });
+// });
 
 function mostrarCredito(){
     datosCreditos=document.getElementById('pcredito').value.split('_')
