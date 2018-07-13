@@ -43,9 +43,9 @@ public function __construct()
             return view('cobranza.pago.index',["pagos"=>$pagos,"searchText"=>$query]);
         }
     }
-    public function create()
+  public function create()
     {
-    	$creditos=DB::table('activo as a')
+        $creditos=DB::table('activo as a')
     	->join('persona as p','a.cliente','=','p.nombre_apellido')
     	->select('p.nombre_apellido','a.cliente','a.idcredito','a.zona','a.saldo','a.proyeccion','a.vencimiento','a.estado')
     	->where('a.estado','=','Activo')
@@ -76,8 +76,7 @@ public function __construct()
         //     Cobranza::create($request->all());
         //     return response()->json([
         //         "mensaje" => "creado"
-        //     ]);
-            
+        //     ]); 
         // }
         
     }
