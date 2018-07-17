@@ -148,6 +148,7 @@
             </a>
             <ul class="treeview-menu">
               <li><a href="{{url('rep_entrega')}}"><i class="fa fa-circle-o"></i>Entregas</a></li>
+              <li><a href="{{url('rep_activo')}}"><i class="fa fa-circle-o"></i>Activos</a></li>
             </ul>
           </li>       
             <li class="treeview">

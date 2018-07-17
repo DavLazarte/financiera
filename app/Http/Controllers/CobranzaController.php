@@ -70,7 +70,7 @@ public function __construct()
             $activo->estado='Cancelado';
             $activo->update();
         }
-        return back()->with('status','cargado');
+        return back()->with('status','Pago cargado correctamente');
     
         // if($request->ajax()){
         //     Cobranza::create($request->all());

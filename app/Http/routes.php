@@ -45,7 +45,7 @@ Route::get('reporteingresos/{searchText}', 'IngresoController@report');
 Route::get('reporteingresos', 'IngresoController@reporte');
 Route::get('reportesalidas/{searchText}', 'SalidaController@report');
 Route::get('reportesalidas', 'SalidaController@reporte');
-Route::get('reporteact/{searchText}', 'ActivoController@report');
+Route::get('reporteact/{zona}', 'ActivoController@report');
 Route::get('planilla/{searchText}', 'ActivoController@planilla');
 Route::get('reporteact', 'ActivoController@reporte');
 Route::get('reportecajas/{searchText}', 'CajaController@reporte');
@@ -67,6 +67,7 @@ Route::get('eliminar_activo/{id}', 'ActivoController@destroy');
 Route::get('reporte_entrega/{id}', 'VentaController@reporte');
 Route::get('reporte_activo/{id}', 'ActivoController@reporte');
 Route::get('rep_entrega','VentaController@vistaentrega');
+Route::get('rep_activo','ActivoController@vistactivo');
 
 //datatables
 Route::get('listado_clientes','ClienteController@listar_cliente');
