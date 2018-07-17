@@ -76,3 +76,5 @@ Route::get('listado_entrega','VentaController@listar_entrega');
 Route::get('listado_entregas_data','VentaController@data_entrega');
 Route::get('listado_activo','ActivoController@listar_activo');
 Route::get('listado_activos_data','ActivoController@data_activo');
+Route::get('listado_pago','CobranzaController@listar_pago');
+Route::get('listado_pagos_data','CobranzaController@data_pago');

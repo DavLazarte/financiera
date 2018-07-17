@@ -123,7 +123,7 @@
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="{{url('cobranza/pago')}}"><i class="fa fa-circle-o"></i> Pagos</a></li>
+                <li><a href="{{url('listado_pago')}}"><i class="fa fa-circle-o"></i> Pagos</a></li>
               </ul>
             </li>
           @if(Auth::user()->name == 'Z0')

@@ -12,6 +12,7 @@ use ConfiSis\Http\Requests\CobranzaFormRequest;
 use ConfiSis\Cobranza;
 use ConfiSis\Activo;
 use DB;
+use Datatables;
 
 use Fpdf;
 use Carbon\Carbon;
@@ -20,29 +21,43 @@ use Illuminate\Support\Collection;
 
 class CobranzaController extends Controller
 {
-public function __construct()
-{
-    $this->middleware('auth');
-}
-  public function index(Request $request)
+    public function __construct()
     {
-
-        if ($request)
-        {
-            $query=trim($request->get('searchText'));
-            $pagos=DB::table('cobranza as c')
-            ->join('venta as v','c.idventa','=','v.idventa')
-            ->join('persona as p','v.idpersona','=','p.idpersona')
-            ->select('c.idcobranza','c.idventa','c.fecha_hora','c.zona','p.nombre_apellido','c.monto','c.estado')
-            ->where('nombre_apellido','LIKE','%'.$query.'%')
-            ->orwhere('c.idventa','LIKE','%'.$query.'%')
-            ->orwhere('c.fecha_hora','LIKE','%'.$query.'%')
-            ->orwhere('c.zona','LIKE','%'.$query.'%')
-            ->orderBy('idcobranza','desc')
-            ->paginate(10);
-            return view('cobranza.pago.index',["pagos"=>$pagos,"searchText"=>$query]);
-        }
+        $this->middleware('auth');
     }
+    //index datatable
+    public function listar_pago(){
+        return view('cobranza.pago.index');
+    }
+
+    public function data_pago(){
+      $pago=DB::table('cobranza as c')
+        ->join('venta as v','c.idventa','=','v.idventa')
+        ->join('persona as p','v.idpersona','=','p.idpersona')
+        ->select('c.idcobranza','c.idventa','c.fecha_hora','c.zona','p.nombre_apellido','c.monto','c.estado');
+        return Datatables::of($pago)
+        ->make(true);
+    }
+
+//   public function index(Request $request)
+//     {
+
+//         if ($request)
+//         {
+//             $query=trim($request->get('searchText'));
+//             $pagos=DB::table('cobranza as c')
+//             ->join('venta as v','c.idventa','=','v.idventa')
+//             ->join('persona as p','v.idpersona','=','p.idpersona')
+//             ->select('c.idcobranza','c.idventa','c.fecha_hora','c.zona','p.nombre_apellido','c.monto','c.estado')
+//             ->where('nombre_apellido','LIKE','%'.$query.'%')
+//             ->orwhere('c.idventa','LIKE','%'.$query.'%')
+//             ->orwhere('c.fecha_hora','LIKE','%'.$query.'%')
+//             ->orwhere('c.zona','LIKE','%'.$query.'%')
+//             ->orderBy('idcobranza','desc')
+//             ->paginate(10);
+//             return view('cobranza.pago.index',["pagos"=>$pagos,"searchText"=>$query]);
+//         }
+//     }
   public function create()
     {
         $creditos=DB::table('activo as a')
