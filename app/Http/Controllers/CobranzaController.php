@@ -45,25 +45,25 @@ class CobranzaController extends Controller
         ->make(true);
     }
 
-//   public function index(Request $request)
-//     {
-
-//         if ($request)
-//         {
-//             $query=trim($request->get('searchText'));
-//             $pagos=DB::table('cobranza as c')
-//             ->join('venta as v','c.idventa','=','v.idventa')
-//             ->join('persona as p','v.idpersona','=','p.idpersona')
-//             ->select('c.idcobranza','c.idventa','c.fecha_hora','c.zona','p.nombre_apellido','c.monto','c.estado')
-//             ->where('nombre_apellido','LIKE','%'.$query.'%')
-//             ->orwhere('c.idventa','LIKE','%'.$query.'%')
-//             ->orwhere('c.fecha_hora','LIKE','%'.$query.'%')
-//             ->orwhere('c.zona','LIKE','%'.$query.'%')
-//             ->orderBy('idcobranza','desc')
-//             ->paginate(10);
-//             return view('cobranza.pago.index',["pagos"=>$pagos,"searchText"=>$query]);
-//         }
-//     }
+  public function vistapago(Request $request)
+    {
+        if ($request)
+        {
+            $zona    = trim($request->get('zona'));
+            $fecha   = trim($request->get('fecha'));
+            $credito = trim($request->get('credito'));
+            $pagos   = DB::table('cobranza as c')
+            ->join('venta as v','c.idventa','=','v.idventa')
+            ->join('persona as p','v.idpersona','=','p.idpersona')
+            ->select('c.idcobranza','c.idventa','c.fecha_hora','c.zona','p.nombre_apellido','c.monto','c.estado')
+            ->where('c.zona','=',$zona)
+            ->where('c.fecha_hora','=',$fecha)
+            ->orwhere('c.idventa','=',$credito)
+            ->orderBy('idcobranza','desc')
+            ->paginate(10);
+            return view('movimientos.pago',["pagos"=>$pagos,"zona"=>$zona,"fecha"=>$fecha,"credito"=>$credito]);
+        }
+    }
   public function create()
     {
         $creditos=DB::table('activo as a')
@@ -183,16 +183,15 @@ class CobranzaController extends Controller
          $pdf::Output();
          exit;
     }
-    public function report(Request $request,$searchText){
+    public function report($zona, $fecha, $credito){
          //Obtenemos los registros
          $registros=DB::table('cobranza as c')
             ->join('venta as v','c.idventa','=','v.idventa')
             ->join('persona as p','v.idpersona','=','p.idpersona')
             ->select('c.idcobranza','c.idventa','c.fecha_hora','c.zona','p.nombre_apellido','c.monto','c.estado')
-            ->where('nombre_apellido','LIKE','%'.$searchText.'%')
-            ->orwhere('c.idventa','LIKE','%'.$searchText.'%')
-            ->orwhere('c.fecha_hora','LIKE','%'.$searchText.'%')
-            ->orwhere('c.zona','LIKE','%'.$searchText.'%')
+            ->where('c.zona','=',$zona)
+            ->where('c.fecha_hora','=',$fecha)
+            ->orwhere('c.idventa','=',$credito)
             ->orderBy('idcobranza','asc')
             ->get();
 

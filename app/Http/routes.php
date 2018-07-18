@@ -37,7 +37,7 @@ Route::get('/home', 'HomeController@index');
 Route::get('reporteclientes', 'ClienteController@reporte');
 Route::get('reporteempleados', 'EmpleadoController@reporte');
 Route::get('reporteentregas/{zona},{fecha}', 'VentaController@report');
-Route::get('reportepagos/{searchText}', 'CobranzaController@report');
+Route::get('reportepagos/{zona},{fecha},{credito?}', 'CobranzaController@report');
 Route::get('reportepagos', 'CobranzaController@reporte');
 Route::get('reporteref/{searchText}', 'RefinanciacionController@report');
 Route::get('reporteref', 'RefinanciacionController@reporte');
@@ -70,6 +70,7 @@ Route::get('reporte_entrega/{id}', 'VentaController@reporte');
 Route::get('reporte_activo/{id}', 'ActivoController@reporte');
 Route::get('rep_entrega','VentaController@vistaentrega');
 Route::get('rep_activo','ActivoController@vistactivo');
+Route::get('rep_pago','CobranzaController@vistapago');
 
 //datatables
 Route::get('listado_clientes','ClienteController@listar_cliente');
