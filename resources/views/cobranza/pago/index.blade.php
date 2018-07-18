@@ -48,7 +48,7 @@ $(document).ready(function(){
             { data: 'zona', name:'c.zona' },
             { data: 'nombre_apellido', name: 'p.nombre_apellido' },
             { data: 'monto', name: 'c.monto' },
-            // { data: 'action', name:'venta.action', orderable: false, searchable:false }
+            { data: 'action', name:'c.action', orderable: false, searchable:false }
         ]
     });
   });		 

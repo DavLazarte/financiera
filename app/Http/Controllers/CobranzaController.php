@@ -36,6 +36,12 @@ class CobranzaController extends Controller
         ->join('persona as p','v.idpersona','=','p.idpersona')
         ->select('c.idcobranza','c.idventa','c.fecha_hora','c.zona','p.nombre_apellido','c.monto','c.estado');
         return Datatables::of($pago)
+        ->addColumn('action', function($pago){
+            return '<a href="editar_pago/'.$pago->idcobranza.'" <button title="Editar" class="btn btn-info btn-sm"><i class="fa fa-pencil-square-o"></i></button></a>  <a href="eliminar_pago/'.$pago->idcobranza.'" <button title="Eliminar" class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a> ';
+        })
+        ->editColumn('fecha_hora', function($pago){
+            return $pago->fecha_hora ? with(new Carbon($pago->fecha_hora))->format('m/d/Y') : '';
+        })
         ->make(true);
     }
 
@@ -115,16 +121,16 @@ class CobranzaController extends Controller
         $pago->monto=$request->get('monto');
         $pago->estado='Activo';           
         $pago->update();
-        return Redirect::to('cobranza/pago');
+        return Redirect::to('listado_pago');
     
     }
   
     public function destroy($id)
     {
         $pago=Cobranza::findOrFail($id);
-        $pago->estado='Cancelado';
+        $pago->estado='Eliminado';
         $pago->update();
-        return Redirect::to('cobranza/pago');
+        return Redirect::to('listado_pago');
     }
     public function reporte(){
          //Obtenemos los registros
