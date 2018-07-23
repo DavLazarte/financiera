@@ -19,7 +19,8 @@
     {{-- <input type="text" class="form-control" name="zona" placeholder="Ingresar la Zona" value="{{$zona}}"> --}}
     <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12"> 
         <div class="form-group">
-            <select name="zona" class="form-control" value="{{$zona}}">
+            <select name="zona" class="form-control" >
+                    <option value="Elegir Zona">Elegir Zona</option>
                     <option value="Z0">Z0</option>
                     <option value="Z1">Z1</option>
                     <option value="Z2">Z2</option>

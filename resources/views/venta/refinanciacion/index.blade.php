@@ -34,7 +34,7 @@
 					<td>{{ $ref->estado}}</td>
 					<td>
 						<a href="{{URL::action('RefinanciacionController@edit',$ref->idrefinanciacion)}}"><button class="btn btn-info">Editar</button></a>
-                         <a href="" data-target="#modal-delete-{{$ref->idrefinanciacion}}" data-toggle="modal"><button class="btn btn-danger">Estados</button></a>
+                        <a href="" data-target="#modal-delete-{{$ref->idrefinanciacion}}" data-toggle="modal"><button class="btn btn-danger">Estados</button></a>
 					</td>
 				</tr>
 				@include('venta.refinanciacion.modal')

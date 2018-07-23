@@ -62,7 +62,7 @@ class VentaController extends Controller
             ->join('persona as p','v.idpersona','=','p.idpersona')
             ->select('v.idventa','v.fecha_hora','v.zona','v.idpersona','p.nombre_apellido','v.monto','v.plan','v.fecha_cancela','v.concepto','v.empleado','v.estado')
             ->where('v.zona','=',$zona)
-            ->where('v.fecha_hora','=',$fecha)
+            ->orwhere('v.fecha_hora','=',$fecha)
             ->orderBy('idventa','desc')
             ->get();
             return view('movimientos.entrega',["ventas"=>$ventas,"zona"=>$zona,"fecha"=>$fecha]);
@@ -188,7 +188,7 @@ class VentaController extends Controller
             ->join('persona as p','v.idpersona','=','p.idpersona')
             ->select('v.idventa','v.fecha_hora','v.zona','v.idpersona','p.nombre_apellido','v.monto','v.plan','v.fecha_cancela','v.concepto','v.empleado','v.estado')
             ->where('v.zona','=',$zona)        
-            ->where('v.fecha_hora','=',$fecha)        
+            ->orwhere('v.fecha_hora','=',$fecha)        
             ->orderBy('idventa','desc')
             ->get();
 

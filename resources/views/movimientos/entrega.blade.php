@@ -21,7 +21,8 @@
     <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12"> 
         <div class="form-group">
             <label for="zona">Zona</label>
-            <select name="zona" class="form-control" value="{{$zona}}">
+            <select name="zona" class="form-control">
+                    <option value="Elegir Zona">Elegir Zona</option>
                     <option value="Z0">Z0</option>
                     <option value="Z1">Z1</option>
                     <option value="Z2">Z2</option>
@@ -36,7 +37,7 @@
         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
            <div class="form-group">
             <label for="fecha">Fecha</label> 
-            <input type="date" class="form-control" name="fecha"  value="{{$fecha}}">
+            <input type="date" class="form-control" name="fecha" >
            </div>
         </div>
         <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">

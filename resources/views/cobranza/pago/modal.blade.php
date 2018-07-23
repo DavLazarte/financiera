@@ -1,10 +1,10 @@
 <div class="modal fade modal-slide-in-right" aria-hidden="true"
-role="dialog" tabindex="-1" id="modal-delete-{{$pag->idcobranza}}">
-	{{Form::Open(array('action'=>array('CobranzaController@destroy',$pag->idcobranza),'method'=>'delete'))}}
+role="dialog" tabindex="-1" id="modal-delete-{{$pago->idcobranza}}">
+	{{-- {{Form::Open(array('action'=>array('CobranzaController@destroy',$pago->idcobranza),'method'=>'delete'))}} --}}
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" 
+				<button type="button" class="close" data-dismiss="modal"
 				aria-label="Close">
                      <span aria-hidden="true">×</span>
                 </button>
@@ -16,9 +16,10 @@ role="dialog" tabindex="-1" id="modal-delete-{{$pag->idcobranza}}">
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 				<button type="submit" class="btn btn-primary">Confirmar</button>
+			<a href="eliminar_pago/{{$pago->idcobranza}}" <button title="Eliminar" class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
 			</div>
 		</div>
 	</div>
-	{{Form::Close()}}
+	{{-- {{Form::Close()}} --}}
 
 </div>

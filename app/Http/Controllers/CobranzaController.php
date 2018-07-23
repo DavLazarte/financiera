@@ -34,10 +34,11 @@ class CobranzaController extends Controller
       $pago=DB::table('cobranza as c')
         ->join('venta as v','c.idventa','=','v.idventa')
         ->join('persona as p','v.idpersona','=','p.idpersona')
-        ->select('c.idcobranza','c.idventa','c.fecha_hora','c.zona','p.nombre_apellido','c.monto','c.estado');
+        ->select('c.idcobranza','c.idventa','c.fecha_hora','c.zona','p.nombre_apellido','c.monto','c.estado')
+        ->where('c.estado','=','Activo');
         return Datatables::of($pago)
         ->addColumn('action', function($pago){
-            return '<a href="editar_pago/'.$pago->idcobranza.'" <button title="Editar" class="btn btn-info btn-sm"><i class="fa fa-pencil-square-o"></i></button></a>  <a href="eliminar_pago/'.$pago->idcobranza.'" <button title="Eliminar" class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a> ';
+            return '<a href="editar_pago/'.$pago->idcobranza.'" <button title="Editar" class="btn btn-info btn-sm"><i class="fa fa-pencil-square-o"></i></button></a>  <a href="eliminar_pago/'.$pago->idcobranza.'" <button title="Eliminar" class="btn btn-danger btn-sm" data-dismiss="alert" aria-label="Close"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>';
         })
         ->editColumn('fecha_hora', function($pago){
             return $pago->fecha_hora ? with(new Carbon($pago->fecha_hora))->format('m/d/Y') : '';
@@ -57,10 +58,10 @@ class CobranzaController extends Controller
             ->join('persona as p','v.idpersona','=','p.idpersona')
             ->select('c.idcobranza','c.idventa','c.fecha_hora','c.zona','p.nombre_apellido','c.monto','c.estado')
             ->where('c.zona','=',$zona)
-            ->where('c.fecha_hora','=',$fecha)
+            ->orwhere('c.fecha_hora','=',$fecha)
             ->orwhere('c.idventa','=',$credito)
             ->orderBy('idcobranza','desc')
-            ->paginate(10);
+            ->get();
             return view('movimientos.pago',["pagos"=>$pagos,"zona"=>$zona,"fecha"=>$fecha,"credito"=>$credito]);
         }
     }
@@ -132,57 +133,57 @@ class CobranzaController extends Controller
         $pago->update();
         return Redirect::to('listado_pago');
     }
-    public function reporte(){
-         //Obtenemos los registros
-         $registros=DB::table('cobranza as c')
-            ->join('venta as v','c.idventa','=','v.idventa')
-            ->join('persona as p','v.idpersona','=','p.idpersona')
-            ->select('c.idcobranza','c.idventa','c.fecha_hora','c.zona','p.nombre_apellido','c.monto','c.estado')
-            ->orderBy('idcobranza','asc')
-            ->get();
+    // public function reporte(){
+    //      //Obtenemos los registros
+    //      $registros=DB::table('cobranza as c')
+    //         ->join('venta as v','c.idventa','=','v.idventa')
+    //         ->join('persona as p','v.idpersona','=','p.idpersona')
+    //         ->select('c.idcobranza','c.idventa','c.fecha_hora','c.zona','p.nombre_apellido','c.monto','c.estado')
+    //         ->orderBy('idcobranza','asc')
+    //         ->get();
 
-         $pdf = new Fpdf();
-         $pdf::AddPage();
-         $pdf::SetTextColor(35,56,113);
-         $pdf::SetFont('Arial','B',11);
-         $pdf::Cell(0,10,utf8_decode("Listado de Pagos"),0,"","C");
-         $pdf::Ln();
-         $pdf::Ln();
-         $pdf::SetTextColor(0,0,0);  // Establece el color del texto 
-         $pdf::SetFillColor(206, 246, 245); // establece el color del fondo de la celda 
-         $pdf::SetFont('Arial','B',10); 
-         //El ancho de las columnas debe de sumar promedio 190
+    //      $pdf = new Fpdf();
+    //      $pdf::AddPage();
+    //      $pdf::SetTextColor(35,56,113);
+    //      $pdf::SetFont('Arial','B',11);
+    //      $pdf::Cell(0,10,utf8_decode("Listado de Pagos"),0,"","C");
+    //      $pdf::Ln();
+    //      $pdf::Ln();
+    //      $pdf::SetTextColor(0,0,0);  // Establece el color del texto 
+    //      $pdf::SetFillColor(206, 246, 245); // establece el color del fondo de la celda 
+    //      $pdf::SetFont('Arial','B',10); 
+    //      //El ancho de las columnas debe de sumar promedio 190
 
-         $pdf::cell(15,8,utf8_decode("Codigo"),1,"","L",true);
-         $pdf::cell(15,8,utf8_decode("Credito"),1,"","L",true);
-         $pdf::cell(25,8,utf8_decode("Fecha"),1,"","L",true);
-         $pdf::cell(10,8,utf8_decode("Zona"),1,"","L",true);
-         $pdf::cell(55,8,utf8_decode("Cliente"),1,"","L",true);
-         $pdf::cell(20,8,utf8_decode("Monto"),1,"","L",true);
-         $pdf::cell(20,8,utf8_decode("Estado"),1,"","L",true);
+    //      $pdf::cell(15,8,utf8_decode("Codigo"),1,"","L",true);
+    //      $pdf::cell(15,8,utf8_decode("Credito"),1,"","L",true);
+    //      $pdf::cell(25,8,utf8_decode("Fecha"),1,"","L",true);
+    //      $pdf::cell(10,8,utf8_decode("Zona"),1,"","L",true);
+    //      $pdf::cell(55,8,utf8_decode("Cliente"),1,"","L",true);
+    //      $pdf::cell(20,8,utf8_decode("Monto"),1,"","L",true);
+    //      $pdf::cell(20,8,utf8_decode("Estado"),1,"","L",true);
          
-         $pdf::Ln();
-         $pdf::SetTextColor(0,0,0);  // Establece el color del texto 
-         $pdf::SetFillColor(255, 255, 255); // establece el color del fondo de la celda
-         $pdf::SetFont("Arial","",9);
-         $pago=0;
+    //      $pdf::Ln();
+    //      $pdf::SetTextColor(0,0,0);  // Establece el color del texto 
+    //      $pdf::SetFillColor(255, 255, 255); // establece el color del fondo de la celda
+    //      $pdf::SetFont("Arial","",9);
+    //      $pago=0;
          
-         foreach ($registros as $reg)
-         {
-         	$pdf::cell(15,6,utf8_decode($reg->idcobranza),1,"","L",true);
-            $pdf::cell(15,6,utf8_decode($reg->idventa),1,"","L",true);
-            $pdf::cell(25,6,substr($reg->fecha_hora,0,10),1,"","L",true);
-            $pdf::cell(10,6,utf8_decode($reg->zona),1,"","L",true);
-            $pdf::cell(55,6,utf8_decode($reg->nombre_apellido),1,"","L",true);
-            $pdf::cell(20,6,utf8_decode($reg->monto),1,"","L",true);
-            $pdf::cell(20,6,utf8_decode($reg->estado),1,"","L",true);
-            $pago=$pago+$reg->monto;
-            $pdf::Ln(); 
-         }
-         $pdf::cell(160,8,utf8_decode("Cobranza = ".$pago),1,"","C",true);
-         $pdf::Output();
-         exit;
-    }
+    //      foreach ($registros as $reg)
+    //      {
+    //      	$pdf::cell(15,6,utf8_decode($reg->idcobranza),1,"","L",true);
+    //         $pdf::cell(15,6,utf8_decode($reg->idventa),1,"","L",true);
+    //         $pdf::cell(25,6,substr($reg->fecha_hora,0,10),1,"","L",true);
+    //         $pdf::cell(10,6,utf8_decode($reg->zona),1,"","L",true);
+    //         $pdf::cell(55,6,utf8_decode($reg->nombre_apellido),1,"","L",true);
+    //         $pdf::cell(20,6,utf8_decode($reg->monto),1,"","L",true);
+    //         $pdf::cell(20,6,utf8_decode($reg->estado),1,"","L",true);
+    //         $pago=$pago+$reg->monto;
+    //         $pdf::Ln(); 
+    //      }
+    //      $pdf::cell(160,8,utf8_decode("Cobranza = ".$pago),1,"","C",true);
+    //      $pdf::Output();
+    //      exit;
+    // }
     public function report($zona, $fecha, $credito){
          //Obtenemos los registros
          $registros=DB::table('cobranza as c')
@@ -190,7 +191,7 @@ class CobranzaController extends Controller
             ->join('persona as p','v.idpersona','=','p.idpersona')
             ->select('c.idcobranza','c.idventa','c.fecha_hora','c.zona','p.nombre_apellido','c.monto','c.estado')
             ->where('c.zona','=',$zona)
-            ->where('c.fecha_hora','=',$fecha)
+            ->orwhere('c.fecha_hora','=',$fecha)
             ->orwhere('c.idventa','=',$credito)
             ->orderBy('idcobranza','asc')
             ->get();

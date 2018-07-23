@@ -21,6 +21,7 @@
         <div class="form-group">
             <label for="zona">Zona</label>
             <select name="zona" class="form-control" value="{{$zona}}">
+                    <option value="Elegir zona">Elegir Zona</option>
                     <option value="Z0">Z0</option>
                     <option value="Z1">Z1</option>
                     <option value="Z2">Z2</option>
@@ -35,7 +36,7 @@
     <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
         <div class="form-group">
            <label for="fecha">Fecha</label> 
-           <input type="date" class="form-control" name="fecha"  value="{{$fecha}}">
+           <input type="date" class="form-control" name="fecha">
         </div>
     </div>
     <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
@@ -72,7 +73,7 @@
 					<td>{{ $pag->zona}}</td>
 					<td>{{ $pag->nombre_apellido}}</td>
 					<td>{{ $pag->monto}}</td>
-				</tr>
+                </tr>
 				@endforeach
 			</table>
 		</div>
