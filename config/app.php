@@ -158,7 +158,6 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Anouar\Fpdf\FpdfServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -209,7 +208,6 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Fpdf' => Anouar\Fpdf\Facades\Fpdf::class,
         'Datatables' => Yajra\Datatables\Facades\Datatables::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

@@ -45,10 +45,10 @@ class VentaController extends Controller
                 }
             })
             ->editColumn('fecha_hora', function($venta) {
-            return $venta->fecha_hora ? with(new Carbon($venta->fecha_hora))->format('m/d/Y') : '';
+            return $venta->fecha_hora ? with(new Carbon($venta->fecha_hora))->format('d/m/Y') : '';
             })
             ->editColumn('fecha_cancela', function($venta) {
-            return $venta->fecha_cancela ? with(new Carbon($venta->fecha_cancela))->format('m/d/Y') : '';
+            return $venta->fecha_cancela ? with(new Carbon($venta->fecha_cancela))->format('d/m/Y') : '';
             })
             ->make(true);
     }

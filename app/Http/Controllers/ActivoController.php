@@ -39,7 +39,7 @@ class ActivoController extends Controller
             return '<a href="editar_activo/'.$activo->idcredito.'" <button title="Editar" class="btn btn-info btn-sm"><i class="fa fa-pencil-square-o"></i></button> </a> <a href="reporte_activo/'.$activo->idcredito.'" <button title="imprimir" class="btn btn-warning btn-sm" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></button></a> <a href="refi_activo/'.$activo->idcredito.'" <button title="Refinanciar" class="btn btn-primary btn-sm"><i class="fa fa-calendar-times-o"></i></button</a> '; 
         })
         ->editColumn('vencimiento', function($activo) {
-            return $activo->vencimiento ? with(new Carbon($activo->vencimiento))->format('m/d/Y') : '';
+            return $activo->vencimiento ? with(new Carbon($activo->vencimiento))->format('d/m/Y') : '';
         })
         ->setRowClass(function ($activo){
             $vencimiento = new Carbon($activo->vencimiento);

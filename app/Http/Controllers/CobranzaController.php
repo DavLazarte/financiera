@@ -41,7 +41,7 @@ class CobranzaController extends Controller
             return '<a href="editar_pago/'.$pago->idcobranza.'" <button title="Editar" class="btn btn-info btn-sm"><i class="fa fa-pencil-square-o"></i></button></a>  <a href="eliminar_pago/'.$pago->idcobranza.'" <button title="Eliminar" class="btn btn-danger btn-sm" data-dismiss="alert" aria-label="Close"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>';
         })
         ->editColumn('fecha_hora', function($pago){
-            return $pago->fecha_hora ? with(new Carbon($pago->fecha_hora))->format('m/d/Y') : '';
+            return $pago->fecha_hora ? with(new Carbon($pago->fecha_hora))->format('d/m/Y') : '';
         })
         ->make(true);
     }
