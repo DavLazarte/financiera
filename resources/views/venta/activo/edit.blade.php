@@ -40,8 +40,41 @@
                 <input type="text"   name="vencimiento" value="{{$activo->vencimiento}}" class="form-control">
             </div>
             <div class="form-group">
-                <label for="estada">Estado</label>
-                <input type="text"   name="estado" value="{{$activo->estado}}" class="form-control">
+                <label for="estado">Elegir Estado</label>
+                <select name="estado" class="form-control">
+                    @if ($activo->estado == 'Cancelado' )
+                       <option value="Cancelado" selected>Cancelado</option>
+                       <option value="Activo">Activo</option>
+                       <option value="Refinanciado">Refinanciado</option>
+                       <option value="Unificado">Unificado</option>
+                       <option value="Vencida">Vencida</option>
+                    @elseif ($activo->estado == 'Activo' )
+                       <option value="Cancelado">Cancelado</option>
+                       <option value="Activo" selected>Activo</option>
+                       <option value="Refinanciado">Refinanciado</option>
+                       <option value="Unificado">Unificado</option>
+                       <option value="Vencida">Vencida</option>
+                    @elseif ($activo->estado == 'Refinanciado' )
+                       <option value="Cancelado" >Cancelado</option>
+                       <option value="Activo">Activo</option>
+                       <option value="Refinanciado" selected>Refinanciado</option>
+                       <option value="Unificado">Unificado</option>
+                       <option value="Vencida">Vencida</option>
+                    @elseif ($activo->estado == 'Unificado' )
+                       <option value="Cancelado">Cancelado</option>
+                       <option value="Activo">Activo</option>
+                       <option value="Refinanciado">Refinanciado</option>
+                       <option value="Unificado" selected>Unificado</option>
+                       <option value="Vencida">Vencida</option>
+                    @else ($activo->estado == 'Vencimiento' )
+                       <option value="Cancelado" >Cancelado</option>
+                       <option value="Activo">Activo</option>
+                       <option value="Refinanciado">Refinanciado</option>
+                       <option value="Unificado">Unificado</option>
+                       <option value="Vencida" selected>Vencida</option>
+                    @endif
+                </select>
+                </select>
             </div>
         </div>
         <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12">
