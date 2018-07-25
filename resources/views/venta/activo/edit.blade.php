@@ -39,6 +39,10 @@
                 <label for="vencimiento">Cancelación</label>
                 <input type="text"   name="vencimiento" value="{{$activo->vencimiento}}" class="form-control">
             </div>
+            <div class="form-group">
+                <label for="estada">Estado</label>
+                <input type="text"   name="estado" value="{{$activo->estado}}" class="form-control">
+            </div>
         </div>
         <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12">
             <div class="form-group" id="botones">

@@ -107,7 +107,7 @@ class ActivoController extends Controller
         $activo->saldo=$request->get('saldo');
         $activo->proyeccion=$request->get('proyeccion');
         $activo->vencimiento=$request->get('vencimiento'); 
-        $activo->estado='Activo'; 
+        $activo->estado=$request->get('estado'); 
         $activo->update();
         return Redirect::to('listado_activo');
     
