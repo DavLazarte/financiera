@@ -58,7 +58,7 @@ class CobranzaController extends Controller
             ->join('persona as p','v.idpersona','=','p.idpersona')
             ->select('c.idcobranza','c.idventa','c.fecha_hora','c.zona','p.nombre_apellido','c.monto','c.estado')
             ->where('c.zona','=',$zona)
-            ->orwhere('c.fecha_hora','=',$fecha)
+            ->where('c.fecha_hora','=',$fecha)
             ->orwhere('c.idventa','=',$credito)
             ->orderBy('idcobranza','desc')
             ->get();
@@ -191,7 +191,7 @@ class CobranzaController extends Controller
             ->join('persona as p','v.idpersona','=','p.idpersona')
             ->select('c.idcobranza','c.idventa','c.fecha_hora','c.zona','p.nombre_apellido','c.monto','c.estado')
             ->where('c.zona','=',$zona)
-            ->orwhere('c.fecha_hora','=',$fecha)
+            ->where('c.fecha_hora','=',$fecha)
             ->orwhere('c.idventa','=',$credito)
             ->orderBy('idcobranza','asc')
             ->get();

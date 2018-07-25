@@ -20,8 +20,8 @@
     <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12"> 
         <div class="form-group">
             <label for="zona">Zona</label>
-            <select name="zona" class="form-control" value="{{$zona}}">
-                    <option value="Elegir zona">Elegir Zona</option>
+        <select name="zona" class="form-control" >
+                    <option value="0">Elegir Zona</option>
                     <option value="Z0">Z0</option>
                     <option value="Z1">Z1</option>
                     <option value="Z2">Z2</option>
@@ -36,13 +36,13 @@
     <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
         <div class="form-group">
            <label for="fecha">Fecha</label> 
-           <input type="date" class="form-control" name="fecha">
+        <input type="date" class="form-control" name="fecha" value="{{$fecha}}">
         </div>
     </div>
     <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
         <div class="form-group">
              <label for="credito">Credito</label> 
-             <input type="text" class="form-control" name="credito"  value="0">
+        <input type="text" class="form-control" name="credito" value="0">
         </div>
     </div>
     <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
@@ -82,7 +82,7 @@
 {{Form::close()}}
 <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
     <div class="form-group">
-      <a href="{{URL::action('CobranzaController@report',[$zona,$fecha,$credito])}}" target="_blank"><button title="Reporte" class="btn btn-warning"><i class="fa fa-print" aria-hidden="true"></i></button></a>
+      <a href="{{url('reportepagos',[$zona,$fecha,$credito])}}" target="_blank"><button title="Reporte" class="btn btn-warning"><i class="fa fa-print" aria-hidden="true"></i></button></a>
     </div>
 </div>
 @endsection
