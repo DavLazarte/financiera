@@ -29,8 +29,8 @@ class AppServiceProvider extends ServiceProvider
         if (env('REDIRECT_HTTPS')){
             $this->app['request']->server->set('HTTPS', true);
         }
-        // $this->app->bind('path.public', function() {
-        //     return base_path().'/ConfiCredSiS';
-        // });
+         $this->app->bind('path.public', function() {
+             return base_path().'/ConfiCredSiS';
+        });
     }
 }
