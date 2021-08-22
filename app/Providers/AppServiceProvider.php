@@ -3,6 +3,7 @@
 namespace ConfiSis\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Routing\UrlGenerator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -11,9 +12,11 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(UrlGenerator $url)
     {
-        //
+        if (env('REDIRECT_HTTPS')) {
+            $url->formatScheme('https://');
+        }
     }
 
     /**
@@ -23,8 +26,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('path.public', function() {
-            return base_path().'/ConfiCredSiS';
-        });
+        if (env('REDIRECT_HTTPS')){
+            $this->app['request']->server->set('HTTPS', true);
+        }
+        // $this->app->bind('path.public', function() {
+        //     return base_path().'/ConfiCredSiS';
+        // });
     }
 }
